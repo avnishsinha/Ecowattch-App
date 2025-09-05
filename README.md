@@ -28,3 +28,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 Specify your license here (e.g., MIT, Apache 2.0).
+=======
+# Ecowattch-App
+Current template version of our app, 
+>>>>>>> bb6de2af4054e5a510c049796c1a39ef3bd3bff9
