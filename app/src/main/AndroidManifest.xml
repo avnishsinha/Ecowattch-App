@@ -28,6 +28,14 @@
             android:name=".DashboardActivity"
             android:exported="false"
             android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
+        <activity
+            android:name=".ShopActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
     </application>
 
 </manifest>

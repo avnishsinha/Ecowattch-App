@@ -3,16 +3,19 @@ package com.example.ecowattchtechdemo;
 public class ShopItem {
     private String name;
     private int price;
-    private String description;
+    private boolean isSelected;
 
-    public ShopItem(String name, int price, String description) {
+    public ShopItem(String name, int price, boolean isSelected) {
         this.name = name;
         this.price = price;
-        this.description = description;
+        this.isSelected = isSelected;
     }
 
     // Getters
     public String getName() { return name; }
     public int getPrice() { return price; }
-    public String getDescription() { return description; }
+    public boolean isSelected() { return isSelected; }
+    
+    // Setters
+    public void setSelected(boolean selected) { this.isSelected = selected; }
 }

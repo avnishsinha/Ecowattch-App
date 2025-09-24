@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_dark"
-    tools:context=".MainActivity">
+    tools:context=".SignupActivity">
 
     <!-- Gradient Background Circle -->
     <View
@@ -23,38 +23,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100sp"
         android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/matrixtype_display"
             android:text="eCOWATTCH"
             android:textColor="@color/white"
             android:textSize="32sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/matrixtype_display" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <!-- Login Form Container -->
+    <!-- Signup Form Container -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="361dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="32dp"
-        android:background="@drawable/modal_background"
         android:orientation="vertical"
+        android:background="@drawable/modal_background"
         android:padding="32dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/matrixtype_display"
-            android:text="Enter your login information"
+            android:text="Enter your information"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -66,13 +67,14 @@
             app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_user"
+                android:id="@+id/signup_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
                 android:hint="Username"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColorHint="@color/white"
+                android:textSize="12sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,68 +87,80 @@
             app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_pass"
+                android:id="@+id/signup_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColorHint="@color/white"
+                android:textSize="12sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:boxBackgroundColor="@color/input_background"
+            app:boxBackgroundMode="filled"
+            app:hintTextColor="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirm_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/matrixtype_display"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="12sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:orientation="horizontal">
+            app:boxBackgroundColor="@color/input_background"
+            app:boxBackgroundMode="filled"
+            app:hintTextColor="@color/white">
 
-            <CheckBox
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dormitory"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
-                android:text="Remember me"
+                android:hint="Dormitory"
                 android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="12sp" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/matrixtype_display"
-                android:text="Forgot password"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/signup_button"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@drawable/button_background"
             android:fontFamily="@font/matrixtype_display"
-            android:text="Login"
+            android:text="Sign UP"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:visibility="visible" />
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/signup_link"
+            android:id="@+id/login_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/matrixtype_display"
-            android:text="Don't have an account? Sign Up"
+            android:text="Already have an account? Log In"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -155,25 +169,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_marginBottom="80sp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:fontFamily="@font/matrixtype_display"
             android:text="Wattch your power."
             android:textColor="@color/white"
-            android:textSize="12sp"
-            android:fontFamily="@font/matrixtype_display" />
+            android:textSize="19sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/matrixtype_display"
             android:text="Wattch your impact."
             android:textColor="@color/white"
-            android:textSize="12sp"
-            android:fontFamily="@font/matrixtype_display" />
+            android:textSize="19sp" />
 
     </LinearLayout>
 

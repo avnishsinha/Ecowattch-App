@@ -24,8 +24,9 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button loginButton, signupButton;
-    TextInputEditText loginUser, loginPass, signupUser, signupPass;
+    Button loginButton;
+    TextInputEditText loginUser, loginPass;
+    TextView signupLink;
     
     // Notification constants
     public static final String CHANNEL_ID = "i.apps.notifications";
@@ -50,16 +51,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         loginButton = findViewById(R.id.login_button);
-        signupButton = findViewById(R.id.signup_button);
         loginUser = findViewById(R.id.login_user);
         loginPass = findViewById(R.id.login_pass);
-        signupUser = findViewById(R.id.signup_user);
-        signupPass = findViewById(R.id.signup_pass);
+        signupLink = findViewById(R.id.signup_link);
     }
 
     private void setupClickListeners() {
         loginButton.setOnClickListener(v -> handleLogin());
-        signupButton.setOnClickListener(v -> handleSignup());
+        signupLink.setOnClickListener(v -> navigateToSignup());
     }
 
     private void handleLogin() {
@@ -80,33 +79,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void handleSignup() {
-        String username = signupUser.getText().toString().trim();
-        String password = signupPass.getText().toString().trim();
-
-        if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (username.length() < 3) {
-            Toast.makeText(this, "Username must be at least 3 characters", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (password.length() < 6) {
-            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Request notification permission and send notification
-        requestNotificationPermissionAndSend();
-        
-        // Clear signup fields
-        signupUser.setText("");
-        signupPass.setText("");
-        
-        Toast.makeText(this, "Account created successfully! You can now log in.", Toast.LENGTH_LONG).show();
+    private void navigateToSignup() {
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
     }
 
     private void navigateToDashboard(String username) {

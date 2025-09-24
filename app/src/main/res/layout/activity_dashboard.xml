@@ -1,144 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background_dark">
 
-    <!-- Header -->
-    <LinearLayout
+    <!-- Gradient Background Circle -->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
+        android:alpha="1"
+        android:background="@drawable/gradient_circle" />
+
+    <!-- Hamburger Menu Button -->
+    <ImageView
+        android:id="@+id/menu_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@android:drawable/ic_menu_preferences"
+        android:tint="@color/white" />
+
+    <!-- Main Content Area -->
+
+    <!-- Bottom Navigation Buttons -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:id="@+id/username_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Welcome, User"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_preferences"
-            android:layout_marginStart="16dp"/>
-
-    </LinearLayout>
-
-    <!-- Current Usage Card -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/card_background">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="200dp"
+        android:paddingHorizontal="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center">
+            android:paddingLeft="20dp"
+            android:paddingTop="90dp">
+
+            <!-- User Status -->
+            <TextView
+                android:id="@+id/username_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/matrixtype_display"
+                android:gravity="center"
+                android:text="TINSELY - 1ST PLACE"
+                android:textColor="@color/text_red"
+                android:textSize="17sp"
+                android:textStyle="normal" />
+
+            <!-- Current Usage -->
+
+            <TextView
+                android:id="@+id/current_usage_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/matrixtype_display"
+                android:gravity="center"
+                android:text="280kw"
+                android:textColor="@color/white"
+                android:textSize="90sp"
+                android:textStyle="normal" />
+
+            <!-- Yesterday's Total -->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Current Usage"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/matrixtyp_display_bold"
+                android:gravity="center"
+                android:text="Yesterdays Total: 5297kwh"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
 
+            <!-- Potential Energy Bar -->
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/current_usage_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="240"
-                    android:textColor="@color/accent_green"
-                    android:textSize="48sp"
-                    android:textStyle="bold"/>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="15sp"
+                android:background="@drawable/button_background"
+                android:gravity="center"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="kW"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginStart="8dp"/>
+                    android:fontFamily="@font/matrixtype_display"
+                    android:text="237 Potential Energy"
+                    android:textColor="@color/text_red"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Usage Status Indicator -->
+            <!-- Leaderboard -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/matrixtype_display"
+                android:gravity="center"
+                android:text="Leaderboard"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="normal" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="16dp">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="8dp"
-                    android:layout_weight="1"
-                    android:background="@color/accent_green"
-                    android:layout_marginEnd="4dp"/>
-
-                <View
-                    android:layout_width="60dp"
-                    android:layout_height="8dp"
-                    android:background="@color/accent_green_light"/>
+                android:layout_marginBottom="32dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="!!!"
-                    android:textColor="@color/warning_orange"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"/>
+                    android:layout_marginBottom="10sp"
+                    android:fontFamily="@font/matrixtyp_display_bold"
+                    android:gravity="center"
+                    android:text="1st: Tinsley"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:fontFamily="@font/matrixtyp_display_bold"
+                    android:gravity="center"
+                    android:text="2nd: Mckay"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/matrixtyp_display_bold"
+                    android:gravity="center"
+                    android:text="3rd: Allen"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
             </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Records Button -->
+        <LinearLayout
+            android:id="@+id/records_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_background"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:tint="@color/white"
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" "
-                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="15sp"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="Records"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 Days Left!"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                android:layout_marginTop="8dp"/>
+                android:fontFamily="@font/matrixtype_display" />
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+        <!-- Shop Button -->
+        <LinearLayout
+            android:id="@+id/shop_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <!-- Tab Layout -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="8dp"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15sp"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="Shop"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="5460 energy"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Modal Overlay (initially hidden) -->
+    <LinearLayout
+        android:id="@+id/modal_overlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/card_background"
-        app:tabTextColor="@color/text_secondary"
-        app:tabSelectedTextColor="@color/accent_green"
-        app:tabIndicatorColor="@color/accent_green"/>
+        android:layout_height="match_parent"
+        android:background="@color/transparent_black"
+        android:visibility="gone"
+        android:orientation="vertical">
 
-    <!-- ViewPager -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        <!-- Modal Tabs -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_dialog_alert"
+                android:tint="@color/text_red"
+                android:padding="8dp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_popup_reminder"
+                android:tint="@color/white"
+                android:padding="8dp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:tint="@color/white"
+                android:padding="8dp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:tint="@color/white"
+                android:padding="8dp" />
+
+        </LinearLayout>
+
+        <!-- Modal Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/modal_background"
+            android:padding="24dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="ALERTS"
+                android:textColor="@color/text_red"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/matrixtype_display" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/matrixtype_display" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
