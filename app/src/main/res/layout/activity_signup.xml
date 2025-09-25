@@ -10,20 +10,21 @@
 
     <!-- Gradient Background Circle -->
     <View
-        android:layout_width="400dp"
+        android:layout_width="600dp"
         android:layout_height="400dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/gradient_circle"
-        android:alpha="0.8" />
+        android:layout_centerInParent="true"
+        android:alpha="0.8"
+        android:background="@drawable/gradient_circle_extended" />
 
 
     <!-- Logo -->
+
+    <!-- Signup Form Container -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100sp"
+        android:layout_marginTop="60dp"
         android:gravity="center">
 
         <TextView
@@ -37,7 +38,6 @@
 
     </LinearLayout>
 
-    <!-- Signup Form Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80sp"
+        android:layout_marginBottom="50sp"
         android:gravity="center"
         android:orientation="vertical">
 

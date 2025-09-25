@@ -36,6 +36,10 @@
             android:name=".ShopActivity"
             android:exported="false"
             android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
+        <activity
+            android:name=".RecordsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
     </application>
 
 </manifest>

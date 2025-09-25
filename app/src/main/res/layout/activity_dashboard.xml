@@ -7,11 +7,13 @@
 
     <!-- Gradient Background Circle -->
     <View
-        android:layout_width="wrap_content"
+        android:layout_width="600dp"
         android:layout_height="400dp"
         android:layout_alignParentBottom="true"
-        android:alpha="1"
-        android:background="@drawable/gradient_circle" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-150dp"
+        android:alpha="0.8"
+        android:background="@drawable/gradient_circle_extended" />
 
     <!-- Hamburger Menu Button -->
     <ImageView
@@ -72,21 +74,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/matrixtyp_display_bold"
                 android:gravity="center"
                 android:text="Yesterdays Total: 5297kwh"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
-            <!-- Potential Energy Bar -->
+            <!-- Potential Energy Pill -->
+
+            <!-- Leaderboard -->
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="15sp"
-                android:background="@drawable/button_background"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/pill_background"
                 android:gravity="center"
-                android:padding="16dp">
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -99,7 +104,6 @@
 
             </LinearLayout>
 
-            <!-- Leaderboard -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,26 +172,26 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button_background"
-            android:padding="16dp"
+            android:background="@drawable/main_button_background"
+            android:padding="20dp"
             android:orientation="vertical"
             android:gravity="center">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:src="@android:drawable/ic_menu_preferences"
                 android:tint="@color/white"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="12dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15sp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/matrixtype_display"
                 android:text="Records"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -207,26 +211,26 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/button_background"
+            android:background="@drawable/main_button_background"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="12dp"
                 android:src="@android:drawable/ic_menu_preferences"
                 android:tint="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15sp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/matrixtype_display"
                 android:text="Shop"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -260,6 +264,7 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/tab_alerts"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
@@ -269,6 +274,7 @@
                 android:padding="8dp" />
 
             <ImageView
+                android:id="@+id/tab_notifications"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
@@ -278,6 +284,7 @@
                 android:padding="8dp" />
 
             <ImageView
+                android:id="@+id/tab_settings"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
@@ -287,6 +294,7 @@
                 android:padding="8dp" />
 
             <ImageView
+                android:id="@+id/tab_profile"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/button_background"
@@ -296,8 +304,9 @@
 
         </LinearLayout>
 
-        <!-- Modal Content -->
+        <!-- Modal Content Container -->
         <LinearLayout
+            android:id="@+id/modal_content_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -306,23 +315,117 @@
             android:padding="24dp"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="ALERTS"
-                android:textColor="@color/text_red"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/matrixtype_display" />
-
-            <TextView
+            <!-- Alerts Tab Content -->
+            <LinearLayout
+                android:id="@+id/tab_content_alerts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:fontFamily="@font/matrixtype_display" />
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="ALERTS"
+                    android:textColor="@color/text_red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/matrixtype_display" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/matrixtype_display" />
+
+            </LinearLayout>
+
+            <!-- Notifications Tab Content -->
+            <LinearLayout
+                android:id="@+id/tab_content_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="NOTIFICATIONS"
+                    android:textColor="@color/text_red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/matrixtype_display" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You have 3 new notifications. Check your energy usage alerts and leaderboard updates."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/matrixtype_display" />
+
+            </LinearLayout>
+
+            <!-- Settings Tab Content -->
+            <LinearLayout
+                android:id="@+id/tab_content_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="SETTINGS"
+                    android:textColor="@color/text_red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/matrixtype_display" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Configure your energy monitoring preferences and app settings."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/matrixtype_display" />
+
+            </LinearLayout>
+
+            <!-- Profile Tab Content -->
+            <LinearLayout
+                android:id="@+id/tab_content_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="PROFILE"
+                    android:textColor="@color/text_red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/matrixtype_display" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="View and edit your profile information and energy goals."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/matrixtype_display" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

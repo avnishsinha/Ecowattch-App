@@ -7,12 +7,13 @@
 
     <!-- Gradient Background Circle -->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="400sp"
-        android:layout_alignParentTop="false"
-        android:layout_marginTop="40sp"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:alpha="0.8"
-        android:background="@drawable/gradient_circle" />
+        android:background="@drawable/gradient_circle_extended" />
 
 
     <!-- User Profile Section -->
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="200sp"
+        android:layout_marginTop="250dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -70,16 +71,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="450sp"
+        android:layout_marginTop="400sp"
         android:background="@drawable/modal_background"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <!-- Energy Points and Back Button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -125,7 +126,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -174,7 +175,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="20dp"
             android:background="@color/text_secondary" />
 
     </LinearLayout>
@@ -184,10 +185,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="600sp"
+        android:layout_marginTop="550sp"
         android:background="@drawable/modal_background"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shop_recycler"

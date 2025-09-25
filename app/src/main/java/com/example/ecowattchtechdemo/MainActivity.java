@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +22,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.example.ecowattchtechdemo.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,16 +30,12 @@ public class MainActivity extends AppCompatActivity {
     TextInputEditText loginUser, loginPass;
     TextView signupLink;
     
-    // Notification constants
-    public static final String CHANNEL_ID = "i.apps.notifications";
-    public static final int NOTIFICATION_ID = 1234;
-    public static final String DESCRIPTION = "Test notification";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void navigateToDashboard(String username) {
         Intent intent = new Intent(this, DashboardActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra(Constants.EXTRA_USERNAME, username);
         startActivity(intent);
         finish(); // Close login activity
     }
@@ -106,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
-                    CHANNEL_ID,
-                    DESCRIPTION,
+                    Constants.CHANNEL_ID,
+                    Constants.DESCRIPTION,
                     NotificationManager.IMPORTANCE_HIGH
             );
 
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, Constants.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("EcoWattch Account Created")
                 .setContentText("Successfully created your account. You may now log in.")
@@ -130,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) 
                 == PackageManager.PERMISSION_GRANTED) {
-            NotificationManagerCompat.from(this).notify(NOTIFICATION_ID, builder.build());
+            NotificationManagerCompat.from(this).notify(Constants.NOTIFICATION_ID, builder.build());
         }
     }
 
