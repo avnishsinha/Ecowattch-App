@@ -10,12 +10,11 @@
 
     <!-- Gradient Background Circle -->
     <View
-        android:layout_width="400dp"
+        android:layout_width="600dp"
         android:layout_height="400dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/gradient_circle"
-        android:alpha="0.8" />
+        android:layout_centerInParent="true"
+        android:alpha="0.8"
+        android:background="@drawable/gradient_circle_extended" />
 
 
     <!-- Logo -->
@@ -23,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:gravity="center">
 
         <TextView
@@ -54,7 +53,7 @@
             android:fontFamily="@font/matrixtype_display"
             android:text="Enter your login information"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -155,25 +154,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_marginBottom="60sp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/matrixtype_display"
             android:text="Wattch your power."
             android:textColor="@color/white"
-            android:textSize="12sp"
-            android:fontFamily="@font/matrixtype_display" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/matrixtype_display"
             android:text="Wattch your impact."
             android:textColor="@color/white"
-            android:textSize="12sp"
-            android:fontFamily="@font/matrixtype_display" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
