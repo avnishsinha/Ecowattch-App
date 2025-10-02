@@ -17,7 +17,8 @@ app.post("/login", async (req, res) => {
       .input("username", sql.NVarChar, usernames)
       .input("password", sql.NVarChar, passwords)
       .query("SELECT * FROM LogIns WHERE usernames = @username AND passwords = @password");
-      //.query("SELECT * FROM LogIns");
+
+
 
     if (result.recordset.length > 0) {
       res.json({ status: "success", user: result.recordset[0] });

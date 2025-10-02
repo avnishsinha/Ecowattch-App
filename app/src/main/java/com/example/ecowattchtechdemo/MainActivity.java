@@ -93,25 +93,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Network Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
-
-        //old way the login worked, don't worry about this :)
-        /*
-        String username = loginUser.getText().toString().trim();
-        String password = loginPass.getText().toString().trim();
-
-        if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Simple validation - in real app, you'd validate against a database
-        if (username.length() >= 3 && password.length() >= 6) {
-            Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
-            navigateToDashboard(username);
-        } else {
-            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-        }
-         */
         });
     }
 
