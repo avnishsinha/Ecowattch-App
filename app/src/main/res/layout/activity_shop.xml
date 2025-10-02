@@ -8,10 +8,11 @@
     <!-- Gradient Background Circle -->
     <View
         android:layout_width="600dp"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginLeft="-100dp"
+        android:layout_marginTop="50dp"
         android:alpha="0.8"
         android:background="@drawable/gradient_circle_extended" />
 

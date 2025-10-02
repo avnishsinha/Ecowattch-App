@@ -8,9 +8,10 @@
     <!-- Gradient Background Circle -->
     <View
         android:layout_width="600dp"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="-100dp"
         android:layout_marginTop="200sp"
         android:alpha="0.8"
         android:background="@drawable/gradient_circle_extended" />
@@ -332,7 +333,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical">
 
             <TextView
