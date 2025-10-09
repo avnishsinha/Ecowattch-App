@@ -31,5 +31,39 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// POST /signup
+app.post('/signup', async (req, res) => {
+  try {
+    const { usernames, passwords } = req.body;
+
+    if (!usernames || !passwords) {
+      return res.status(400).json({ status: 'error', message: 'Username and password required' });
+    }
+
+    const pool = await poolPromise;
+
+    // Check if username already exists
+    const checkUser = await pool.request()
+      .input('usernames', sql.NVarChar, usernames)
+      .query('SELECT * FROM LogIns WHERE usernames = @usernames');
+
+    if (checkUser.recordset.length > 0) {
+      return res.status(409).json({ status: 'error', message: 'Username already exists' });
+    }
+
+    // Insert the new user
+    await pool.request()
+      .input('username', sql.NVarChar, usernames)
+      .input('password', sql.NVarChar, passwords)
+      .query('INSERT INTO LogIns (usernames, passwords) VALUES (@username, @password)');
+
+    res.status(201).json({ status: 'success', message: 'User created successfully' });
+
+  } catch (error) {
+    console.error('Signup error:', error);
+    res.status(500).json({ status: 'error', message: 'Internal server error' });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`API running on port ${PORT}`));

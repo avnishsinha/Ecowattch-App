@@ -26,6 +26,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//for json object stuff
+import org.json.JSONObject;
+import org.json.JSONException;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.Request;
+import com.android.volley.toolbox.Volley;
+
 public class MainActivity extends AppCompatActivity {
 
     Button loginButton, signupButton;
@@ -100,6 +107,40 @@ public class MainActivity extends AppCompatActivity {
         String username = signupUser.getText().toString().trim();
         String password = signupPass.getText().toString().trim();
 
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("usernames", username);
+            jsonBody.put("passwords", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String url = "http://10.0.2.2:3000/signup";  // local API on emulator
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
+                response -> {
+                    Toast.makeText(getApplicationContext(), "Sign-up successful!", Toast.LENGTH_SHORT).show();
+                },
+                error -> {
+                    String errorMsg = "Sign-up failed";
+                    if (error.networkResponse != null && error.networkResponse.data != null) {
+                        try {
+                            String responseBody = new String(error.networkResponse.data, "utf-8");
+                            JSONObject data = new JSONObject(responseBody);
+                            errorMsg = data.optString("message", errorMsg);
+                        } catch (Exception e) {
+                            // fallback to default errorMsg
+                        }
+                    }
+                    Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Sign-up failed: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+        );
+
+        Volley.newRequestQueue(this).add(request);
+
+        /* old way the signup was handled locally without backend
+
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -121,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
         // Clear signup fields
         signupUser.setText("");
         signupPass.setText("");
-        
-        Toast.makeText(this, "Account created successfully! You can now log in.", Toast.LENGTH_LONG).show();
+
+         */
     }
 
     private void navigateToDashboard(String username) {
