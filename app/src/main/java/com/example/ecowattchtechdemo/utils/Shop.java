@@ -7,4 +7,20 @@ import android.view.View;
 import android.content.Intent;
 
 public class Shop extends AppCompatActivity {
+    Button backButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shop);
+
+        backButton = (Button)findViewById((R.id.back_button));
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
 }
