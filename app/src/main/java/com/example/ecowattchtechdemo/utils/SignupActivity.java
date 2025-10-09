@@ -8,5 +8,5 @@ import android.content.Intent;
 import com.example.ecowattchtechdemo.R;
 
 public class SignupActivity extends AppCompatActivity {
-    
+
 }
