@@ -25,5 +25,10 @@ public class LoginFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         // Link XML layout to this Fragment
         return inflater.inflate(R.layout.fragment_login, container, false);
+
+        loginButton = (Button)container.findViewById(R.id.login_button);
+        signupLink = (TextView)container.findViewById(R.id.signup_link);
+        loginUser = (TextInputEditText)container.findViewById(R.id.login_user);
+        loginPass = (TextInputEditText)container.findViewById(R.id.login_pass);
     }
 }
