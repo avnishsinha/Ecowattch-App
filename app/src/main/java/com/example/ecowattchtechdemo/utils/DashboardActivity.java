@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 
-public class Dashboard extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
     Button records, shop;
 
     @Override
@@ -20,7 +20,7 @@ public class Dashboard extends AppCompatActivity {
         records.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Dashboard.this, Records.class);
+                Intent intent = new Intent(DashboardActivity.this, RecordsActivity.class);
                 startActivity(intent);
             }
         });
@@ -28,7 +28,7 @@ public class Dashboard extends AppCompatActivity {
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Dashboard.this, Shop.class);
+                Intent intent = new Intent(DashboardActivity.this, ShopActivity.class);
                 startActivity(intent);
             }
         });
