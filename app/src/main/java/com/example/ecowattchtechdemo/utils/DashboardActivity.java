@@ -33,6 +33,14 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Only add the fragment if it’s not already added
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.dash_content_fragment_container, new DashContentFragment())
+                    .commit();
+        }
     }
 
 }
