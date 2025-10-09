@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.view.View;
+import com.example.ecowattchtechdemo.R;
 
 public class RecordsActivity extends AppCompatActivity {
     Button backButton;

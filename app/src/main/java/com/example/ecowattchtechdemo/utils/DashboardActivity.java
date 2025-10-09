@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
+import com.example.ecowattchtechdemo.R;
 
 public class DashboardActivity extends AppCompatActivity {
     Button records, shop;
@@ -14,8 +15,8 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        records = (android.widget.LinearLayout)findViewById(R.id.records_button);
-        shop = (android.widget.LinearLayout)findViewById(R.id.shop_button);
+        records = (Button)findViewById(R.id.records_button);
+        shop = (Button)findViewById(R.id.shop_button);
 
         records.setOnClickListener(new View.OnClickListener() {
             @Override
