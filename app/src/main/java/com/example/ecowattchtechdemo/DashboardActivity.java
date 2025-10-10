@@ -2,20 +2,20 @@ package com.example.ecowattchtechdemo;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
+import android.widget.LinearLayout;
 
 public class DashboardActivity extends AppCompatActivity {
-    Button records, shop;
+    LinearLayout records, shop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        records = (Button)findViewById(R.id.records_button);
-        shop = (Button)findViewById(R.id.shop_button);
+        records = (LinearLayout)findViewById(R.id.records_button);
+        shop = (LinearLayout)findViewById(R.id.shop_button);
 
         records.setOnClickListener(new View.OnClickListener() {
             @Override

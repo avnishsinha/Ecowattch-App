@@ -1,5 +1,6 @@
 package com.example.ecowattchtechdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +25,32 @@ public class SignupFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Link XML layout to this Fragment
-        return inflater.inflate(R.layout.fragment_signup, container, false);
+        View view = inflater.inflate(R.layout.fragment_signup, container, false);
 
-        signupButton = (Button)container.findViewById(R.id.signup_button);
-        loginLink = (TextView)container.findViewById(R.id.login_link);
-        signupUser = (TextInputEditText)container.findViewById(R.id.signup_user);
-        signupPass = (TextInputEditText)container.findViewById(R.id.signup_pass);
-        confirmPass = (TextInputEditText)container.findViewById(R.id.confirm_pass);
-        dorm = (TextInputEditText)container.findViewById(R.id.dormitory);
+        signupButton = (Button)view.findViewById(R.id.signup_button);
+        loginLink = (TextView)view.findViewById(R.id.login_link);
+        signupUser = (TextInputEditText)view.findViewById(R.id.signup_user);
+        signupPass = (TextInputEditText)view.findViewById(R.id.signup_pass);
+        confirmPass = (TextInputEditText)view.findViewById(R.id.confirm_pass);
+        dorm = (TextInputEditText)view.findViewById(R.id.dormitory);
+
+        signupButton.setOnClickListener(v -> {
+            String username = signupUser.getText().toString().trim();
+            String password = signupPass.getText().toString().trim();
+            String confirm = confirmPass.getText().toString().trim();
+            String dormitory = dorm.getText().toString().trim();
+
+            // handle signup logic
+        });
+
+        loginLink.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.login_signup_fragment_container, new LoginFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        return view;
     }
 }

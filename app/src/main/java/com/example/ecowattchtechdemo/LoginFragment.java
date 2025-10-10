@@ -24,11 +24,28 @@ public class LoginFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Link XML layout to this Fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        loginButton = (Button)container.findViewById(R.id.login_button);
-        signupLink = (TextView)container.findViewById(R.id.signup_link);
-        loginUser = (TextInputEditText)container.findViewById(R.id.login_user);
-        loginPass = (TextInputEditText)container.findViewById(R.id.login_pass);
+        loginButton = (Button)view.findViewById(R.id.login_button);
+        signupLink = (TextView)view.findViewById(R.id.signup_link);
+        loginUser = (TextInputEditText)view.findViewById(R.id.login_user);
+        loginPass = (TextInputEditText)view.findViewById(R.id.login_pass);
+
+        loginButton.setOnClickListener(v -> {
+            String username = loginUser.getText().toString().trim();
+            String password = loginPass.getText().toString().trim();
+
+            // handle login logic
+        });
+
+        signupLink.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.login_signup_fragment_container, new SignupFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        return view;
     }
 }
