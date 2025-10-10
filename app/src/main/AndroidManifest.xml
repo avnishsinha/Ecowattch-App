@@ -15,7 +15,7 @@
         android:theme="@style/Theme.EcoWattchTechDemo"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginSignupActivity"
             android:exported="true"
             android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar">
             <intent-filter>
@@ -28,10 +28,10 @@
             android:name=".DashboardActivity"
             android:exported="false"
             android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
-        <activity
-            android:name=".SignupActivity"
-            android:exported="false"
-            android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
+<!--        <activity-->
+<!--            android:name=".LoginSignupActivity"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>-->
         <activity
             android:name=".ShopActivity"
             android:exported="false"

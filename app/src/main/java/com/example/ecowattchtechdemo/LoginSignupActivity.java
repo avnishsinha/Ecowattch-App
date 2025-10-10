@@ -3,7 +3,7 @@ package com.example.ecowattchtechdemo;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SignupActivity extends AppCompatActivity {
+public class LoginSignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -13,7 +13,7 @@ public class SignupActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.login_signup_fragment_container, new SignupFragment())
+                    .replace(R.id.login_signup_fragment_container, new LoginFragment())
                     .commit();
         }
     }
