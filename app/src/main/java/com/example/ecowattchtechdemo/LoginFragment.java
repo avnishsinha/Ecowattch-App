@@ -1,4 +1,4 @@
-package com.example.ecowattchtechdemo.utils;
+package com.example.ecowattchtechdemo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.example.ecowattchtechdemo.R;
+
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginFragment extends Fragment {
