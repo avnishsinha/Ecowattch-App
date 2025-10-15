@@ -1,144 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background_dark">
 
-    <!-- Header -->
+    <!-- Gradient Background Circle -->
+    <View
+        android:layout_width="600dp"
+        android:layout_height="500dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="-150dp"
+        android:layout_marginBottom="-100dp"
+        android:background="@drawable/gradient_circle_extended"
+        tools:rotation="180" />
+
+    <!-- Hamburger Menu Button -->
+
+    <!-- Main Content Area -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/dash_content_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Bottom Navigation Buttons -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginHorizontal="16dp"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:gravity="center">
 
-        <TextView
-            android:id="@+id/username_text"
+        <!-- Records Button -->
+        <LinearLayout
+            android:id="@+id/records_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Welcome, User"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_preferences"
-            android:layout_marginStart="16dp"/>
-
-    </LinearLayout>
-
-    <!-- Current Usage Card -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/card_background">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/main_button_background"
+            android:padding="20dp"
             android:orientation="vertical"
-            android:padding="24dp"
             android:gravity="center">
 
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_preferences"
+                app:tint="@color/white"
+                android:layout_marginBottom="12dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Current Usage"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="Records"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/current_usage_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="240"
-                    android:textColor="@color/accent_green"
-                    android:textSize="48sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="kW"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginStart="8dp"/>
-
-            </LinearLayout>
-
-            <!-- Usage Status Indicator -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="16dp">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="8dp"
-                    android:layout_weight="1"
-                    android:background="@color/accent_green"
-                    android:layout_marginEnd="4dp"/>
-
-                <View
-                    android:layout_width="60dp"
-                    android:layout_height="8dp"
-                    android:background="@color/accent_green_light"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="!!!"
-                    android:textColor="@color/warning_orange"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"/>
-
-            </LinearLayout>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" "
-                android:textColor="@color/text_secondary"
+                android:text="3 Days Left!"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                android:layout_marginTop="8dp"/>
+                android:fontFamily="@font/matrixtype_display" />
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+        <!-- Shop Button -->
+        <LinearLayout
+            android:id="@+id/shop_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/main_button_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <!-- Tab Layout -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="12dp"
+                android:src="@android:drawable/ic_menu_preferences"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="Shop"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="5460 energy"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Modal Overlay (initially hidden) -->
+    <LinearLayout
+        android:id="@+id/modal_overlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/card_background"
-        app:tabTextColor="@color/text_secondary"
-        app:tabSelectedTextColor="@color/accent_green"
-        app:tabIndicatorColor="@color/accent_green"/>
+        android:layout_height="match_parent"
+        android:background="@color/transparent_black"
+        android:visibility="gone"
+        android:orientation="vertical">
 
-    <!-- ViewPager -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        <!-- Modal Tabs -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/tab_alerts"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_dialog_alert"
+                app:tint="@color/text_red"
+                android:padding="8dp" />
+
+            <ImageView
+                android:id="@+id/tab_notifications"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_popup_reminder"
+                app:tint="@color/white"
+                android:padding="8dp" />
+
+            <ImageView
+                android:id="@+id/tab_settings"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_menu_preferences"
+                app:tint="@color/white"
+                android:padding="8dp" />
+
+            <ImageView
+                android:id="@+id/tab_profile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_menu_preferences"
+                app:tint="@color/white"
+                android:padding="8dp" />
+
+        </LinearLayout>
+
+        <!-- Modal Content Container -->
+        <LinearLayout
+            android:id="@+id/modal_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/modal_background"
+            android:padding="24dp"
+            android:orientation="vertical">
+
+            <!-- Alerts Tab Content -->
+            <LinearLayout
+                android:id="@+id/tab_content_alerts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="ALERTS"
+                    android:textColor="@color/text_red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/matrixtype_display" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/matrixtype_display" />
+
+            </LinearLayout>
+
+            <!-- Notifications Tab Content -->
+            <LinearLayout
+                android:id="@+id/tab_content_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="NOTIFICATIONS"
+                    android:textColor="@color/text_red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/matrixtype_display" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You have 3 new notifications. Check your energy usage alerts and leaderboard updates."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/matrixtype_display" />
+
+            </LinearLayout>
+
+            <!-- Settings Tab Content -->
+            <LinearLayout
+                android:id="@+id/tab_content_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="SETTINGS"
+                    android:textColor="@color/text_red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/matrixtype_display" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Configure your energy monitoring preferences and app settings."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/matrixtype_display" />
+
+            </LinearLayout>
+
+            <!-- Profile Tab Content -->
+            <LinearLayout
+                android:id="@+id/tab_content_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="PROFILE"
+                    android:textColor="@color/text_red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/matrixtype_display" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="View and edit your profile information and energy goals."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/matrixtype_display" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
