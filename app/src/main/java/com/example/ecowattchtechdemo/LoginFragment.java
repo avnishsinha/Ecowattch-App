@@ -1,5 +1,6 @@
 package com.example.ecowattchtechdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,11 @@ public class LoginFragment extends Fragment {
             String username = loginUser.getText().toString().trim();
             String password = loginPass.getText().toString().trim();
 
-            // handle login logic
+            // handle login logic : TODO
+
+            // go to dashboard
+            Intent intent = new Intent(requireContext(), DashboardActivity.class);
+            startActivity(intent);
         });
 
         signupLink.setOnClickListener(v -> {
