@@ -27,12 +27,12 @@ public class SignupFragment extends Fragment {
         // Link XML layout to this Fragment
         View view = inflater.inflate(R.layout.fragment_signup, container, false);
 
-        signupButton = (Button)view.findViewById(R.id.signup_button);
-        loginLink = (TextView)view.findViewById(R.id.login_link);
-        signupUser = (TextInputEditText)view.findViewById(R.id.signup_user);
-        signupPass = (TextInputEditText)view.findViewById(R.id.signup_pass);
-        confirmPass = (TextInputEditText)view.findViewById(R.id.confirm_pass);
-        dorm = (TextInputEditText)view.findViewById(R.id.dormitory);
+        signupButton = view.findViewById(R.id.signup_button);
+        loginLink = view.findViewById(R.id.login_link);
+        signupUser = view.findViewById(R.id.signup_user);
+        signupPass = view.findViewById(R.id.signup_pass);
+        confirmPass = view.findViewById(R.id.confirm_pass);
+        dorm = view.findViewById(R.id.dormitory);
 
         signupButton.setOnClickListener(v -> {
             String username = signupUser.getText().toString().trim();
@@ -40,7 +40,11 @@ public class SignupFragment extends Fragment {
             String confirm = confirmPass.getText().toString().trim();
             String dormitory = dorm.getText().toString().trim();
 
-            // handle signup logic
+            // handle signup logic : TODO
+
+            // go to dashboard
+            Intent intent = new Intent(requireContext(), DashboardActivity.class);
+            startActivity(intent);
         });
 
         loginLink.setOnClickListener(v -> {

@@ -14,8 +14,8 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        records = (LinearLayout)findViewById(R.id.records_button);
-        shop = (LinearLayout)findViewById(R.id.shop_button);
+        records = findViewById(R.id.records_button);
+        shop = findViewById(R.id.shop_button);
 
         records.setOnClickListener(new View.OnClickListener() {
             @Override

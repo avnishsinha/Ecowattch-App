@@ -13,7 +13,7 @@ public class RecordsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_records);
 
-        backButton = (Button)findViewById((R.id.back_button));
+        backButton = findViewById((R.id.back_button));
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

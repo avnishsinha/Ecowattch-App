@@ -27,10 +27,10 @@ public class LoginFragment extends Fragment {
         // Link XML layout to this Fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        loginButton = (Button)view.findViewById(R.id.login_button);
-        signupLink = (TextView)view.findViewById(R.id.signup_link);
-        loginUser = (TextInputEditText)view.findViewById(R.id.login_user);
-        loginPass = (TextInputEditText)view.findViewById(R.id.login_pass);
+        loginButton = view.findViewById(R.id.login_button);
+        signupLink = view.findViewById(R.id.signup_link);
+        loginUser = view.findViewById(R.id.login_user);
+        loginPass = view.findViewById(R.id.login_pass);
 
         loginButton.setOnClickListener(v -> {
             String username = loginUser.getText().toString().trim();

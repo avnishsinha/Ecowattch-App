@@ -13,7 +13,7 @@ public class ShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
-        backButton = (Button)findViewById((R.id.back_button));
+        backButton = findViewById((R.id.back_button));
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
