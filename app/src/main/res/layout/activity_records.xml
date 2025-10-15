@@ -56,7 +56,7 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="8dp"
                     android:src="@android:drawable/ic_menu_preferences"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
             </LinearLayout>
 

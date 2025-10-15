@@ -52,7 +52,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@android:drawable/ic_menu_preferences"
-                android:tint="@color/white"
+                app:tint="@color/white"
                 android:layout_marginBottom="12dp" />
 
             <TextView
@@ -92,7 +92,7 @@
                 android:layout_height="32dp"
                 android:layout_marginBottom="12dp"
                 android:src="@android:drawable/ic_menu_preferences"
-                android:tint="@color/white" />
+                app:tint="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/button_background"
                 android:src="@android:drawable/ic_dialog_alert"
-                android:tint="@color/text_red"
+                app:tint="@color/text_red"
                 android:padding="8dp" />
 
             <ImageView
@@ -151,7 +151,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/button_background"
                 android:src="@android:drawable/ic_popup_reminder"
-                android:tint="@color/white"
+                app:tint="@color/white"
                 android:padding="8dp" />
 
             <ImageView
@@ -161,7 +161,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/button_background"
                 android:src="@android:drawable/ic_menu_preferences"
-                android:tint="@color/white"
+                app:tint="@color/white"
                 android:padding="8dp" />
 
             <ImageView
@@ -170,7 +170,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/button_background"
                 android:src="@android:drawable/ic_menu_preferences"
-                android:tint="@color/white"
+                app:tint="@color/white"
                 android:padding="8dp" />
 
         </LinearLayout>

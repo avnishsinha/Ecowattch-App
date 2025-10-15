@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="160dp"
     android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_centerHorizontal="true"
     android:layout_margin="8dp"
     android:background="@drawable/button_background"
@@ -54,7 +55,7 @@
         android:layout_height="40dp"
         android:layout_centerInParent="true"
         android:src="@android:drawable/ic_menu_preferences"
-        android:tint="@color/white"
+        app:tint="@color/white"
         android:visibility="gone" />
 
 </RelativeLayout>
