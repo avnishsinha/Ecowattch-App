@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">EcoWattch</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_message">Sign in to your account</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="new_to_ecowattch">New to EcoWattch?</string>
+    <string name="create_account_message">Create your account and start saving energy</string>
+    <string name="create_account">Create Account</string>
+    <string name="current_usage">Current Usage</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="shop">Shop</string>
+</resources>

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
+
+    <!-- Gradient Background Circle -->
+    <View
+        android:layout_width="600dp"
+        android:layout_height="500dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="-150dp"
+        android:layout_marginBottom="-100dp"
+        android:background="@drawable/gradient_circle_extended"
+        tools:rotation="180" />
+
+    <!-- Hamburger Menu Button -->
+    <ImageView
+        android:id="@+id/hamburger_menu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:src="@android:drawable/ic_menu_sort_by_size"
+        app:tint="@color/white"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:padding="8dp" />
+
+    <!-- API Status Indicator -->
+    <LinearLayout
+        android:id="@+id/api_status_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <View
+            android:id="@+id/api_status_dot"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/gradient_circle_extended" />
+
+        <TextView
+            android:id="@+id/api_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connected"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:fontFamily="@font/matrixtype_display" />
+
+    </LinearLayout>
+
+    <!-- Main Content Scroll View -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_marginTop="100dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <!-- User Status (Dorm + Rank) -->
+            <TextView
+                android:id="@+id/dorm_status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/matrixtype_display"
+                android:gravity="center"
+                android:text="TINSLEY - 1ST PLACE"
+                android:textColor="@color/text_red"
+                android:textSize="17sp"
+                android:textStyle="normal"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Current Energy Load (Big Display) -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/current_energy_load"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/matrixtype_display"
+                    android:gravity="center"
+                    android:text="280kW"
+                    android:textColor="@color/white"
+                    android:textSize="90sp"
+                    android:textStyle="normal" />
+
+                <!-- Loading indicator for energy load -->
+                <ProgressBar
+                    android:id="@+id/energy_load_progress"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="gone"
+                    android:indeterminateTint="@color/text_red" />
+
+            </RelativeLayout>
+
+            <!-- Yesterday's Total -->
+            <TextView
+                android:id="@+id/yesterday_total_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/matrixtyp_display_bold"
+                android:gravity="center"
+                android:text="Yesterday's Total: 5297kWh"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+
+            <!-- Potential Energy Pill -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/pill_background"
+                android:gravity="center"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:id="@+id/potential_energy_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/matrixtype_display"
+                    android:text="237 Potential Energy"
+                    android:textColor="@color/text_red"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Usage Meter/Gauge -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/matrixtype_display"
+                    android:text="Energy Efficiency"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <!-- Simple progress bar as usage gauge -->
+                <ProgressBar
+                    android:id="@+id/usage_gauge"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:progress="65"
+                    android:max="100"
+                    android:progressTint="@color/accent_green"
+                    android:progressBackgroundTint="@color/card_background" />
+
+                <TextView
+                    android:id="@+id/usage_gauge_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/matrixtype_display"
+                    android:text="Good Efficiency"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <!-- Leaderboard Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/matrixtype_display"
+                android:gravity="center"
+                android:text="Leaderboard"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="normal" />
+
+            <!-- Dynamic Leaderboard List -->
+            <LinearLayout
+                android:id="@+id/leaderboard_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:orientation="vertical">
+
+                <!-- Leaderboard items will be added dynamically -->
+                <TextView
+                    android:id="@+id/leaderboard_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/matrixtype_display"
+                    android:text="Loading leaderboard..."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- Error Message -->
+            <TextView
+                android:id="@+id/error_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/pill_background"
+                android:fontFamily="@font/matrixtype_display"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="Error loading data"
+                android:textColor="@color/error_red"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Bottom Navigation Buttons -->
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Records Button -->
+        <LinearLayout
+            android:id="@+id/records_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/main_button_background"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@android:drawable/ic_menu_recent_history"
+                app:tint="@color/white"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="Records"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rally_days_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 Days Left!"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:fontFamily="@font/matrixtype_display" />
+
+        </LinearLayout>
+
+        <!-- Shop Button -->
+        <LinearLayout
+            android:id="@+id/shop_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/main_button_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="12dp"
+                android:src="@android:drawable/ic_menu_preferences"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="Shop"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_energy_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/matrixtype_display"
+                android:text="5460 energy"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Modal Overlay (initially hidden) -->
+    <LinearLayout
+        android:id="@+id/modal_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_black"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Modal Tabs -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/tab_alerts"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_dialog_alert"
+                app:tint="@color/text_red"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
+
+            <ImageView
+                android:id="@+id/tab_notifications"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_popup_reminder"
+                app:tint="@color/white"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
+
+            <ImageView
+                android:id="@+id/tab_settings"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_menu_preferences"
+                app:tint="@color/white"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
+
+            <ImageView
+                android:id="@+id/tab_profile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_background"
+                android:src="@android:drawable/ic_menu_manage"
+                app:tint="@color/white"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
+
+        <!-- Modal Content Container -->
+        <LinearLayout
+            android:id="@+id/modal_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/modal_background"
+            android:padding="24dp"
+            android:orientation="vertical">
+
+            <!-- Dynamic modal content will be added here -->
+            <TextView
+                android:id="@+id/modal_content_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select a tab above to view content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/matrixtype_display"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Refresh Button (FAB style) -->
+    <ImageView
+        android:id="@+id/refresh_button"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/gradient_circle_extended"
+        android:src="@android:drawable/ic_popup_sync"
+        app:tint="@color/white"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:elevation="8dp" />
+
+</RelativeLayout>

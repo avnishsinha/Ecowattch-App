@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.EcoWattchTechDemo" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- EcoWattch Custom Colors -->
+        <item name="colorPrimary">@color/accent_green</item>
+        <item name="colorPrimaryVariant">@color/accent_green_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/warning_orange</item>
+        <item name="colorSecondaryVariant">@color/warning_orange</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorSurface">@color/card_background</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="android:statusBarColor">@color/background_dark</item>
+        <item name="android:navigationBarColor">@color/background_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.EcoWattchTechDemo" parent="Base.Theme.EcoWattchTechDemo" />
+    
+    <style name="Theme.EcoWattchTechDemo.NoActionBar" parent="Theme.EcoWattchTechDemo">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

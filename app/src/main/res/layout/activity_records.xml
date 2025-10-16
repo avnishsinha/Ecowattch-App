@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_dark"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/records_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Energy Records"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/matrixtype_display"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:id="@+id/records_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Loading records..."
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        android:fontFamily="@font/matrixtype_display"
+        android:lineSpacingExtra="8dp" />
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:text="Back to Dashboard"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/text_red"
+        android:fontFamily="@font/matrixtype_display" />
+
+</LinearLayout>

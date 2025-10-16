@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#f5f5f5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Willow API v3 Tester"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#2c3e50"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Credentials Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🔑 OAuth2 Credentials"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#2c3e50"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Organization Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Organization Name"
+                    app:helperText="e.g., your-company-name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/organization_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Client ID Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Client ID"
+                    app:helperText="Provided by Willow">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/client_id_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Client Secret Input -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:hint="Client Secret"
+                    app:helperText="Keep this secure!"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/client_secret_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Set Credentials Button -->
+                <Button
+                    android:id="@+id/set_credentials_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Set Credentials"
+                    android:backgroundTint="#3498db"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Testing Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🧪 API Testing"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#2c3e50"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Test Authentication Button -->
+                <Button
+                    android:id="@+id/test_auth_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="1️⃣ Test Authentication"
+                    android:backgroundTint="#27ae60"
+                    android:textColor="@android:color/white"
+                    android:enabled="false" />
+
+                <!-- Get Models Button -->
+                <Button
+                    android:id="@+id/get_models_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="2️⃣ Get Models"
+                    android:backgroundTint="#3498db"
+                    android:textColor="@android:color/white"
+                    android:enabled="false" />
+
+                <!-- Search Buildings Button -->
+                <Button
+                    android:id="@+id/search_buildings_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="3️⃣ Search Buildings"
+                    android:backgroundTint="#e67e22"
+                    android:textColor="@android:color/white"
+                    android:enabled="false" />
+
+                <!-- Get Time Series Button -->
+                <Button
+                    android:id="@+id/get_time_series_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4️⃣ Test Time Series"
+                    android:backgroundTint="#9b59b6"
+                    android:textColor="@android:color/white"
+                    android:enabled="false" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Status Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📊 Status"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#2c3e50"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:indeterminate="true" />
+
+                <!-- Status Text -->
+                <TextView
+                    android:id="@+id/status_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Set credentials to begin"
+                    android:textSize="16sp"
+                    android:textColor="#7f8c8d"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Logs Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📝 Test Logs"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#2c3e50"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Logs RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/logs_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="#f8f9fa"
+                    android:padding="8dp"
+                    android:scrollbars="vertical" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
