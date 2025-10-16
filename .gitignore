@@ -7,6 +7,9 @@ app/build/
 # Local properties
 local.properties
 
+# Environment variables with sensitive credentials
+.env
+
 # IDE files
 .idea/
 *.iml
