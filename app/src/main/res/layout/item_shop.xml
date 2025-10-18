@@ -1,61 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="160dp"
-    android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_centerHorizontal="true"
+    android:layout_width="180dp"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@drawable/button_background"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">
 
-    <!-- Energy Text -->
+    <!-- Energy/Price Text -->
     <TextView
-        android:id="@+id/energy_text"
-        android:layout_width="match_parent"
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        android:layout_marginBottom="10sp"
         android:fontFamily="@font/matrixtype_display"
         android:text="400 Energy"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textSize="14sp"
+        android:layout_marginBottom="12dp" />
 
-    <!-- Name Text -->
+    <!-- Palette Name Text -->
     <TextView
-        android:id="@+id/name_text"
-        android:layout_width="match_parent"
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/energy_text"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/matrixtype_display"
         android:text="PEACH"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
 
-    <!-- Color Swatch -->
+    <!-- Palette Color Preview Circle -->
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center">
 
-    <!-- Checkmark Overlay -->
-    <ImageView
-        android:id="@+id/color_swatch"
-        android:layout_width="89dp"
-        android:layout_height="87dp"
-        android:layout_below="@id/name_text"
-        android:layout_marginTop="15sp"
-        android:background="@drawable/gradient_circle"
-        tools:layout_centerHorizontal="true" />
+        <View
+            android:id="@+id/item_color_preview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/gradient_circle_extended"
+            android:layout_gravity="center" />
 
-    <ImageView
-        android:id="@+id/checkmark"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerInParent="true"
-        android:src="@android:drawable/ic_menu_preferences"
-        app:tint="@color/white"
-        android:visibility="gone" />
+        <!-- Checkmark for owned/selected items -->
+        <ImageView
+            android:id="@+id/item_checkmark"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:src="@android:drawable/checkbox_on_background"
+            app:tint="@color/white"
+            android:visibility="gone" />
 
-</RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>

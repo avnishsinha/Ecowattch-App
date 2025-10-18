@@ -17,7 +17,20 @@
         android:background="@drawable/gradient_circle_extended"
         tools:rotation="180" />
 
-    <!-- Hamburger Menu Button -->
+    <!-- Logout Button (Top Right) -->
+    <ImageView
+        android:id="@+id/logout_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_background"
+        android:src="@android:drawable/ic_lock_power_off"
+        app:tint="@color/text_red"
+        android:padding="12dp"
+        android:contentDescription="Logout" />
 
     <!-- Main Content Area -->
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
