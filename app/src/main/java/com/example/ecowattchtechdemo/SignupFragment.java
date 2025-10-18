@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,7 +19,8 @@ import com.google.android.material.textfield.TextInputEditText;
 public class SignupFragment extends Fragment {
     Button signupButton;
     TextView loginLink;
-    TextInputEditText signupUser, signupPass, confirmPass, dorm;
+    TextInputEditText signupUser, signupPass, confirmPass;
+    AutoCompleteTextView dormDropdown;
 
     @Nullable
     @Override
@@ -32,13 +35,23 @@ public class SignupFragment extends Fragment {
         signupUser = view.findViewById(R.id.signup_user);
         signupPass = view.findViewById(R.id.signup_pass);
         confirmPass = view.findViewById(R.id.confirm_pass);
-        dorm = view.findViewById(R.id.dormitory);
+        dormDropdown = view.findViewById(R.id.dormitory);
+
+        // Setup dormitory dropdown with dorm options
+        // Using leaderboard dorms as placeholders (Tinsley, Mckay, Allen)
+        String[] dormitories = {"Tinsley", "Mckay", "Allen"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_dropdown_item_1line,
+                dormitories
+        );
+        dormDropdown.setAdapter(adapter);
 
         signupButton.setOnClickListener(v -> {
             String username = signupUser.getText().toString().trim();
             String password = signupPass.getText().toString().trim();
             String confirm = confirmPass.getText().toString().trim();
-            String dormitory = dorm.getText().toString().trim();
+            String dormitory = dormDropdown.getText().toString().trim();
 
             // handle signup logic : TODO
 
