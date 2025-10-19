@@ -60,15 +60,19 @@ public class DashContentFragment extends Fragment {
     
     /**
      * Update the current energy usage display
+     * @param usage String in format "280kW" or just the number
      */
     public void updateCurrentUsage(String usage) {
         if (currentUsageText != null) {
-            currentUsageText.setText(usage);
+            // Remove "kW" suffix if present, we display it separately
+            String numericValue = usage.replace("kW", "").replace("kw", "").trim();
+            currentUsageText.setText(numericValue);
         }
     }
-    
+
     /**
      * Update the dorm status and leaderboard position
+     * @param dormInfo String in format "TINSLEY - 1ST PLACE"
      */
     public void updateDormStatus(String dormInfo) {
         if (usernameText != null) {
@@ -87,10 +91,13 @@ public class DashContentFragment extends Fragment {
     
     /**
      * Update the potential energy display
+     * @param potentialEnergy String in format "237 Potential Energy" or just the number
      */
     public void updatePotentialEnergy(String potentialEnergy) {
         if (potentialEnergyText != null) {
-            potentialEnergyText.setText(potentialEnergy);
+            // Extract just the number if full string is provided
+            String numericValue = potentialEnergy.replace(" Potential Energy", "").trim();
+            potentialEnergyText.setText(numericValue);
         }
     }
 }

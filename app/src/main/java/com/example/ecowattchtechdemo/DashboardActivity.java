@@ -39,18 +39,11 @@ public class DashboardActivity extends AppCompatActivity {
     View meterFill;
     ImageView thresholdIndicator;
 
-    // TEMPORARY: Testing controls (remove when backend is connected)
-    Button increaseButton, decreaseButton;
-
-    // Dashboard content display
-    TextView currentUsageText, usageUnitText;
-
     // Meter configuration
     private static final int MAX_USAGE = 400; // 400kw max
     private static final int MIN_USAGE = 0;   // 0kw min
-    private static final int INCREMENT_STEP = 10; // Change by 10kw per click
-    private int currentUsage = 280;  // Current hardcoded value (280kw from prototype)
-    private int thresholdValue = 250; // Threshold at 250kw (example)
+    private int currentUsage = 280;  // Initial value, updated by live data
+    private int thresholdValue = 250; // Threshold at 250kw
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +68,6 @@ public class DashboardActivity extends AppCompatActivity {
         records = findViewById(R.id.records_button);
         shop = findViewById(R.id.shop_button);
         logoutButton = findViewById(R.id.logout_button);
-
-        // TEMPORARY: Initialize testing controls (remove when backend is connected)
-        increaseButton = findViewById(R.id.increase_button);
-        decreaseButton = findViewById(R.id.decrease_button);
 
         records.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,34 +118,9 @@ public class DashboardActivity extends AppCompatActivity {
         meterFill = findViewById(R.id.meter_fill);
         thresholdIndicator = findViewById(R.id.threshold_indicator);
 
-        // Initialize dashboard content display references
-        // Note: These are in the fragment, so we need to wait for the view to be created
+        // Initialize meter with default value
         meterFill.post(() -> {
-            currentUsageText = findViewById(R.id.current_usage_text);
-            usageUnitText = findViewById(R.id.usage_unit_text);
-
-            // Update meter with current usage
             updateMeter(currentUsage, thresholdValue);
-        });
-
-        // TEMPORARY: Testing controls - Increase button
-        increaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentUsage = Math.min(currentUsage + INCREMENT_STEP, MAX_USAGE);
-                updateMeter(currentUsage, thresholdValue);
-                updateDashboardDisplay();
-            }
-        });
-
-        // TEMPORARY: Testing controls - Decrease button
-        decreaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentUsage = Math.max(currentUsage - INCREMENT_STEP, MIN_USAGE);
-                updateMeter(currentUsage, thresholdValue);
-                updateDashboardDisplay();
-            }
         });
     }
 
@@ -227,16 +191,6 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     /**
-     * TEMPORARY: Updates the dashboard display with current usage value
-     * This will be replaced when backend API is connected
-     */
-    private void updateDashboardDisplay() {
-        if (currentUsageText != null) {
-            currentUsageText.setText(String.valueOf(currentUsage));
-        }
-    }
-    
-    /**
      * Start the live data update cycle
      */
     private void startLiveDataUpdates() {
@@ -276,31 +230,37 @@ public class DashboardActivity extends AppCompatActivity {
             updateHandler.postDelayed(() -> updateUIWithLiveData(), 1000);
             return;
         }
-        
+
         // Rotate through dorms every few updates (more frequent for testing)
         rotateDorm();
-        
+
         // Generate realistic energy usage data for current dorm
         int baseUsage = getBaseUsageForDorm(currentDormIndex);
-        int currentUsage = baseUsage + random.nextInt(50) - 25; // ±25kW variation
-        
-        Log.d(TAG, "🔄 LIVE UPDATE: " + currentUsage + "kW for " + currentDormName + " (Position: " + dormPositions[currentDormIndex] + ")");
-        
+        int liveUsage = baseUsage + random.nextInt(50) - 25; // ±25kW variation
+
+        // Update the instance variable for meter updates
+        this.currentUsage = liveUsage;
+
+        Log.d(TAG, "🔄 LIVE UPDATE: " + liveUsage + "kW for " + currentDormName + " (Position: " + dormPositions[currentDormIndex] + ")");
+
         // Update current usage (main display)
-        dashContentFragment.updateCurrentUsage(currentUsage + "kW");
-        
+        dashContentFragment.updateCurrentUsage(liveUsage + "kW");
+
+        // Update the energy meter with new usage
+        updateMeter(liveUsage, thresholdValue);
+
         // Update dorm status with position
         String statusText = currentDormName + " - " + dormPositions[currentDormIndex];
         dashContentFragment.updateDormStatus(statusText);
-        
+
         // Calculate potential energy based on usage efficiency
-        int potentialEnergy = Math.max(0, 300 - (currentUsage - 200));
+        int potentialEnergy = Math.max(0, 300 - (liveUsage - 200));
         dashContentFragment.updatePotentialEnergy(potentialEnergy + " Potential Energy");
-        
+
         // Simulate yesterday's total
-        int yesterdayTotal = currentUsage * 24 + random.nextInt(1000);
+        int yesterdayTotal = liveUsage * 24 + random.nextInt(1000);
         dashContentFragment.updateYesterdaysTotal("Yesterday's Total: " + decimalFormat.format(yesterdayTotal) + "kWh");
-        
+
         Log.d(TAG, "✅ Live data update completed successfully - Next update in " + (UPDATE_INTERVAL/1000) + " seconds");
     }
     

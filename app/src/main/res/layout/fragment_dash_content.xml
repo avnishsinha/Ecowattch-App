@@ -45,15 +45,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/matrixtype_display"
-            android:gravity="center"
-            android:text="280kw"
-            android:textColor="@color/white"
-            android:textSize="90sp"
-            android:textStyle="normal"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?android:attr/selectableItemBackground" />
             android:orientation="horizontal"
             android:layout_marginBottom="4dp"
             android:baselineAligned="false">
