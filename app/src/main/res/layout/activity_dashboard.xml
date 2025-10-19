@@ -32,49 +32,128 @@
         android:padding="12dp"
         android:contentDescription="Logout" />
 
+    <!-- TEMPORARY: Testing Controls (Remove when backend is connected) -->
+    <LinearLayout
+        android:id="@+id/test_controls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        android:background="@drawable/button_background"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/decrease_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="-"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/matrixtype_display" />
+
+        <Button
+            android:id="@+id/increase_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/matrixtype_display"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
     <!-- Main Content Area -->
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/dash_content_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- Bottom Navigation Buttons -->
+    <!-- Energy Meter (Right Side) -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav_container"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="80dp">
 
+        <!-- Meter Background -->
+        <View
+            android:id="@+id/meter_background"
+            android:layout_width="12dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/meter_background" />
+
+        <!-- Meter Fill (Dynamic) -->
+        <View
+            android:id="@+id/meter_fill"
+            android:layout_width="12dp"
+            android:layout_height="0dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/meter_fill_shape" />
+
+        <!-- Threshold Triangle -->
+        <ImageView
+            android:id="@+id/threshold_indicator"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@id/meter_background"
+            android:rotation="90"
+            android:src="@android:drawable/arrow_down_float"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
+
+    <!-- Bottom Navigation Buttons -->
     <LinearLayout
+        android:id="@+id/bottom_nav_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
         android:layout_marginHorizontal="32dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <!-- Records Button -->
         <LinearLayout
             android:id="@+id/records_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
-            android:layout_marginEnd="12dp"
             android:background="@drawable/main_button_background"
-            android:paddingVertical="26dp"
-            android:paddingHorizontal="16dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="26dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
                     android:src="@android:drawable/ic_menu_recent_history"
-                    app:tint="@color/white"
-                    android:layout_marginEnd="8dp" />
+                    app:tint="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,13 +169,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:fontFamily="@font/matrixtype_display"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
                 android:text="Coming Soon"
                 android:textColor="@color/white"
-                android:textSize="12sp"
-                android:fontFamily="@font/matrixtype_display"
-                android:background="@drawable/pill_background"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -105,27 +184,27 @@
             android:id="@+id/shop_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
             android:layout_weight="1"
             android:background="@drawable/main_button_background"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingVertical="26dp"
-            android:paddingHorizontal="16dp">
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="26dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
                     android:src="@android:drawable/ic_menu_sort_by_size"
-                    app:tint="@color/white"
-                    android:layout_marginEnd="8dp" />
+                    app:tint="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,13 +220,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
                 android:fontFamily="@font/matrixtype_display"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
                 android:text="5460 energy"
                 android:textColor="@color/white"
-                android:textSize="12sp"
-                android:background="@drawable/pill_background"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
