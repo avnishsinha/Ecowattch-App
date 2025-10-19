@@ -35,11 +35,15 @@
             android:text="280kw"
             android:textColor="@color/white"
             android:textSize="90sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground" />
 
         <!-- Yesterday's Total -->
 
         <TextView
+            android:id="@+id/yesterdays_total_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -62,6 +66,7 @@
             android:paddingVertical="8dp">
 
             <TextView
+                android:id="@+id/potential_energy_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
@@ -105,7 +110,7 @@
                 android:layout_marginBottom="10sp"
                 android:fontFamily="@font/matrixtyp_display_bold"
                 android:gravity="center"
-                android:text="2nd: Mckay"
+                android:text="2nd: Gabaldon"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
@@ -114,10 +119,35 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtyp_display_bold"
                 android:gravity="center"
-                android:text="3rd: Allen"
+                android:text="3rd: Sechrist"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
+        </LinearLayout>
+        
+        <!-- Refresh Button at the bottom -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+            
+            <TextView
+                android:id="@+id/refresh_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/matrixtype_display"
+                android:gravity="center"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="12dp"
+                android:text="🔄 REFRESH"
+                android:textColor="@color/text_red"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+                
         </LinearLayout>
 
     </LinearLayout>
