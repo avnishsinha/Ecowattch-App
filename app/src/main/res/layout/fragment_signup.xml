@@ -9,21 +9,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:layout_marginHorizontal="32dp"
         android:background="@drawable/modal_background"
         android:orientation="vertical"
         android:padding="32dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/matrixtype_display"
             android:text="Enter your information"
-            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -41,8 +40,7 @@
                 android:fontFamily="@font/matrixtype_display"
                 android:hint="Username"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="12sp" />
+                android:textColorHint="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,8 +60,7 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="12sp" />
+                android:textColorHint="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,12 +80,12 @@
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="12sp" />
+                android:textColorHint="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             app:boxBackgroundColor="@color/input_background"
             app:boxBackgroundMode="filled"
             app:hintTextColor="@color/white"
@@ -96,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/dormitory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,7 +101,7 @@
                 android:hint="Dormitory"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:textSize="12sp" />
+                android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
