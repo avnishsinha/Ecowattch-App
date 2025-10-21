@@ -9,12 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SignupFragment extends Fragment {
     Button signupButton;
@@ -53,7 +60,37 @@ public class SignupFragment extends Fragment {
             String confirm = confirmPass.getText().toString().trim();
             String dormitory = dormDropdown.getText().toString().trim();
 
-            // handle signup logic : TODO
+            JSONObject jsonBody = new JSONObject();
+            try {
+                jsonBody.put("usernames", username);
+                jsonBody.put("passwords", password);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String url = "http://10.0.2.2:3000/signup";  // local API on emulator
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
+                    response -> {
+                        Toast.makeText(requireContext(), "Sign-up successful!", Toast.LENGTH_SHORT).show();
+                    },
+                    error -> {
+                        String errorMsg = "Sign-up failed";
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            try {
+                                String responseBody = new String(error.networkResponse.data, "utf-8");
+                                JSONObject data = new JSONObject(responseBody);
+                                errorMsg = data.optString("message", errorMsg);
+                            } catch (Exception e) {
+                                // fallback to default errorMsg
+                            }
+                        }
+                        Toast.makeText(requireContext(), errorMsg, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Sign-up failed: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+            );
+
+            Volley.newRequestQueue(requireContext()).add(request);
 
             // go to dashboard
             Intent intent = new Intent(requireContext(), DashboardActivity.class);
