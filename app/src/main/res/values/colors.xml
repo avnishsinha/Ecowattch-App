@@ -4,7 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     
     <!-- EcoWattch Theme Colors TEMP -->
-    <color name="background_dark">#0F0F0F</color>
     <color name="card_background">#2A2A2A</color>
     <color name="input_background">#3A3A3A</color>
     <color name="accent_green">#4CAF50</color>
@@ -16,6 +15,10 @@
     <!-- New Figma Design Colors -->
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#AAAAAA</color>
+    <color name="background_dark">#1B1B1B</color>
+    <color name="background_light">#262626</color>
+    <color name="accent_color">#CD232E</color>
+
     <color name="text_red">#DB1919</color>
     <color name="container_base">#262626</color>
     <color name="container_dark">#1B1B1B</color>
