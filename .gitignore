@@ -12,6 +12,7 @@ local.properties
 *.iml
 *.ipr
 *.iws
+.claude/
 
 # MacOS files
 .DS_Store
@@ -47,3 +48,4 @@ app/generated/*.iml
 .externalNativeBuild
 .cxx
 local.properties
+CLAUDE_CONTEXT.md
