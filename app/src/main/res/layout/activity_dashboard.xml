@@ -119,7 +119,7 @@
                     app:tint="@color/white" />
 
                 <TextView
-                    android:id="@+id/records_button_text"
+                    android:tag="primary_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/matrixtype_display"
@@ -131,7 +131,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/records_button_caption"
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/pill_background"
@@ -172,7 +172,7 @@
                     app:tint="@color/white" />
 
                 <TextView
-                    android:id="@+id/shop_button_text"
+                    android:tag="primary_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/matrixtype_display"
@@ -184,7 +184,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/shop_button_caption"
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/pill_background"
@@ -278,7 +278,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/alerts_heading"
+                    android:tag="accent_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -289,7 +289,7 @@
                     android:fontFamily="@font/matrixtype_display" />
 
                 <TextView
-                    android:id="@+id/alerts_content"
+                    android:tag="primary_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
@@ -308,7 +308,7 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/notifs_heading"
+                    android:tag="accent_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -319,7 +319,7 @@
                     android:fontFamily="@font/matrixtype_display" />
 
                 <TextView
-                    android:id="@+id/notifs_content"
+                    android:tag="primary_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="You have 3 new notifications. Check your energy usage alerts and leaderboard updates."
@@ -338,7 +338,7 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/settings_heading"
+                    android:tag="accent_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -349,7 +349,7 @@
                     android:fontFamily="@font/matrixtype_display" />
 
                 <TextView
-                    android:id="@+id/settings_content"
+                    android:tag="primary_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Configure your energy monitoring preferences and app settings."
@@ -368,7 +368,7 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/profile_heading"
+                    android:tag="accent_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -379,7 +379,7 @@
                     android:fontFamily="@font/matrixtype_display" />
 
                 <TextView
-                    android:id="@+id/profile_content"
+                    android:tag="primary_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="View and edit your profile information and energy goals."

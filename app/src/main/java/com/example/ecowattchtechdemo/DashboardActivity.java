@@ -324,32 +324,8 @@ public class DashboardActivity extends AppCompatActivity {
         // buttons
 
         // text
-        TextView recordsButtonText = findViewById(R.id.records_button_text);
-        recordsButtonText.setTextColor(primaryColor);
-        TextView recordsButtonCaption = findViewById(R.id.records_button_caption);
-        recordsButtonCaption.setTextColor(primaryColor);
-        TextView shopButtonText = findViewById(R.id.shop_button_text);
-        shopButtonText.setTextColor(primaryColor);
-        TextView shopButtonCaption = findViewById(R.id.shop_button_caption);
-        shopButtonCaption.setTextColor(primaryColor);
 
         // modal text
-        TextView alertsHeading = findViewById(R.id.alerts_heading);
-        alertsHeading.setTextColor(accentColor);
-        TextView alertsContent = findViewById(R.id.alerts_content);
-        alertsContent.setTextColor(primaryColor);
-        TextView notifsHeading = findViewById(R.id.notifs_heading);
-        notifsHeading.setTextColor(accentColor);
-        TextView notifsContent = findViewById(R.id.notifs_content);
-        notifsContent.setTextColor(primaryColor);
-        TextView settingsHeading = findViewById(R.id.settings_heading);
-        settingsHeading.setTextColor(accentColor);
-        TextView settingsContent = findViewById(R.id.settings_content);
-        settingsContent.setTextColor(primaryColor);
-        TextView profileHeading = findViewById(R.id.profile_heading);
-        profileHeading.setTextColor(accentColor);
-        TextView profileContent = findViewById(R.id.profile_content);
-        profileContent.setTextColor(primaryColor);
     }
 
     @Override
