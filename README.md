@@ -2,6 +2,27 @@
 
 ## 🚀 Project Overview
 
+EcoWattch is an Android application that connects with **Willow's Building Operating System API v3** to provide real-time energy-monitoring and management features for campus buildings.
+
+---
+
+## 🔐 **Security & API Configuration**
+
+This project uses secure environment variables to protect API keys and sensitive configuration. See [`ENVIRONMENT_VARIABLES.md`](ENVIRONMENT_VARIABLES.md) for detailed setup instructions.
+
+### **Quick Setup:**
+1. Copy `local.properties.template` to `local.properties`
+2. Fill in your actual API credentials in `local.properties`
+3. Build the project: `./gradlew assembleDebug`
+
+**⚠️ Never commit `local.properties` to version control!**
+
+---
+
+## 📋 Legacy Credential Configuration (Deprecated)ch Android App – Willow API v3 Integration
+
+## 🚀 Project Overview
+
 EcoWattch is an Android application that connects with **Willow’s Building Operating System API v3** to provide real-time energy-monitoring and management features for campus buildings.
 
 ---

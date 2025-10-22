@@ -2,6 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+// Load properties from local.properties file
+def localPropertiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+if (localPropertiesFile.exists()) {
+    localProperties.load(new FileInputStream(localPropertiesFile))
+}
+
 android {
     namespace 'com.example.ecowattchtechdemo'
     compileSdk 35
@@ -14,6 +21,23 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Add BuildConfig fields for API keys and configuration
+        buildConfigField "String", "DB_USER", "\"${localProperties.getProperty('DB_USER', '')}\""
+        buildConfigField "String", "DB_PASSWORD", "\"${localProperties.getProperty('DB_PASSWORD', '')}\""
+        buildConfigField "String", "DB_SERVER", "\"${localProperties.getProperty('DB_SERVER', '')}\""
+        buildConfigField "String", "DB_DATABASE", "\"${localProperties.getProperty('DB_DATABASE', '')}\""
+        buildConfigField "boolean", "DB_ENCRYPT", "${localProperties.getProperty('DB_ENCRYPT', 'true')}"
+        
+        buildConfigField "String", "WILLOW_BASE_URL", "\"${localProperties.getProperty('WILLOW_BASE_URL', '')}\""
+        buildConfigField "String", "WILLOW_CLIENT_ID", "\"${localProperties.getProperty('WILLOW_CLIENT_ID', '')}\""
+        buildConfigField "String", "WILLOW_CLIENT_SECRET", "\"${localProperties.getProperty('WILLOW_CLIENT_SECRET', '')}\""
+        
+        buildConfigField "String", "TWIN_ID_TINSLEY", "\"${localProperties.getProperty('TWIN_ID_TINSLEY', '')}\""
+        buildConfigField "String", "TWIN_ID_GABALDON", "\"${localProperties.getProperty('TWIN_ID_GABALDON', '')}\""
+        buildConfigField "String", "TWIN_ID_SECHRIST", "\"${localProperties.getProperty('TWIN_ID_SECHRIST', '')}\""
+        
+        buildConfigField "int", "SERVER_PORT", "${localProperties.getProperty('SERVER_PORT', '3000')}"
     }
 
     buildTypes {
@@ -21,6 +45,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            // Debug builds can access BuildConfig fields
+            debuggable true
+        }
+    }
+    
+    buildFeatures {
+        buildConfig true  // Enable BuildConfig generation
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

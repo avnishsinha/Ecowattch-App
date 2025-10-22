@@ -1,51 +1,120 @@
+# =============================================================================
+# ANDROID PROJECT GITIGNORE - SECURITY FOCUSED
+# =============================================================================
+
 # Gradle files
 .gradle/
 build/
 app/build/
+*/build/
 !gradle/wrapper/gradle-wrapper.jar
 
-# Local properties
+# =============================================================================
+# SENSITIVE DATA - NEVER COMMIT THESE FILES
+# =============================================================================
+
+# Local configuration with API keys and credentials
 local.properties
 
-# IDE files
+# Environment files with sensitive data
+.env
+env
+*.env.*
+.env.local
+.env.production
+.env.development
+.env.staging
+
+# Keystore files - CRITICAL SECURITY
+*.jks
+*.keystore
+keystore.properties
+release.keystore
+debug.keystore
+
+# Generated BuildConfig containing credentials
+app/build/generated/source/buildConfig/
+**/generated/source/buildConfig/
+
+# =============================================================================
+# IDE AND SYSTEM FILES
+# =============================================================================
+
+# IntelliJ IDEA / Android Studio
 .idea/
 *.iml
 *.ipr
 *.iws
-.claude/
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/gradle.xml
+.idea/jarRepositories.xml
 
-# MacOS files
+# VS Code
+.vscode/
+
+# MacOS system files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# Log files
-*.log
+# =============================================================================
+# ANDROID BUILD FILES
+# =============================================================================
 
-# Android Studio
+# Android Studio captures folder
 captures/
 .externalNativeBuild/
 .cxx/
 
-# Misc
+# NDK
+obj/
+
+# =============================================================================
+# LOGS AND TEMPORARY FILES
+# =============================================================================
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*~
 *.swp
 *.swo
 
+# =============================================================================
+# NODE.JS (for hybrid projects)
+# =============================================================================
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =============================================================================
+# DOCUMENTATION AND CONTEXT FILES
+# =============================================================================
+
+# AI context files
+CLAUDE_CONTEXT.md
+.claude/
+
+# =============================================================================
+# REPORTS AND ANALYSIS
+# =============================================================================
+
 # Reports
 build/reports/
-
-# Generated files
-app/generated/*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-CLAUDE_CONTEXT.md
+reports/

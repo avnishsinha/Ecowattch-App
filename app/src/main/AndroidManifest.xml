@@ -42,6 +42,10 @@
             android:name=".RecordsActivity"
             android:exported="false"
             android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
+        <activity
+            android:name=".WillowApiV3TestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcoWattchTechDemo.NoActionBar"/>
     </application>
 
 </manifest>

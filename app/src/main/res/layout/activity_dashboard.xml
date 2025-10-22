@@ -179,18 +179,16 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pill_background"
-                android:fontFamily="@font/matrixtype_display"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
-                android:text="5460 energy"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/pill_background"
+                    android:fontFamily="@font/matrixtype_display"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
+                    android:text="Energy Shop"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />        </LinearLayout>
 
     </LinearLayout>
 

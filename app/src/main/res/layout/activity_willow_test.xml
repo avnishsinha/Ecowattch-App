@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#1E1E1E">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🌿 EcoWattch - Willow API v3 Test"
+        android:textColor="#00FF88"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Authentication Section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🔐 Authentication Configuration"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Organization URL Input -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Organization URL:"
+        android:textColor="#CCCCCC"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/organization_input"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#888888"
+        android:hint="https://yourorg.app.willowinc.com"
+        android:inputType="textUri"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Client ID Input -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Client ID:"
+        android:textColor="#CCCCCC"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/client_id_input"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#888888"
+        android:hint="Your Client ID (UUID format)"
+        android:inputType="text"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Client Secret Input -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Client Secret:"
+        android:textColor="#CCCCCC"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/client_secret_input"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#888888"
+        android:hint="Your Client Secret"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Authenticate Button -->
+    <Button
+        android:id="@+id/auth_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🔐 Authenticate with Willow API"
+        android:textColor="#FFFFFF"
+        android:background="#00FF88"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Status Text -->
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ready to authenticate"
+        android:textColor="#00FF88"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:background="#333333" />
+
+    <!-- Data Retrieval Section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🏢 Building Energy Data"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Building Data Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/get_tinsley_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🏠 Tinsley"
+            android:textColor="#FFFFFF"
+            android:background="#444444"
+            android:layout_marginEnd="4dp"
+            android:enabled="false" />
+
+        <Button
+            android:id="@+id/get_gabaldon_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🏠 Gabaldon"
+            android:textColor="#FFFFFF"
+            android:background="#444444"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:enabled="false" />
+
+        <Button
+            android:id="@+id/get_sechrist_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🏠 Sechrist"
+            android:textColor="#FFFFFF"
+            android:background="#444444"
+            android:layout_marginStart="4dp"
+            android:enabled="false" />
+    </LinearLayout>
+
+    <!-- Get All Buildings Button -->
+    <Button
+        android:id="@+id/get_all_buildings_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🏢 Get All Buildings Data"
+        android:textColor="#FFFFFF"
+        android:background="#FF6B35"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:enabled="false" />
+
+    <!-- Output Section -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📊 API Response Output"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Scrollable Output -->
+    <ScrollView
+        android:id="@+id/output_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#222222"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/output_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#00FF88"
+            android:textSize="12sp"
+            android:fontFamily="monospace"
+            android:text=""
+            android:scrollbars="vertical" />
+    </ScrollView>
+
+</LinearLayout>

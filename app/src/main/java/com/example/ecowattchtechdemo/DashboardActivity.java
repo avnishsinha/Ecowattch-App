@@ -16,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.TextView;
 
+// Willow API imports
+import com.example.ecowattchtechdemo.willow.WillowEnergyDataManager;
+import com.example.ecowattchtechdemo.willow.WillowApiV3Config;
+import com.example.ecowattchtechdemo.willow.models.EnergyDataResponse;
+
 public class DashboardActivity extends AppCompatActivity {
     private static final String TAG = "DashboardActivity";
     
@@ -34,16 +39,21 @@ public class DashboardActivity extends AppCompatActivity {
     private String[] dormPositions = {"1ST PLACE", "2ND PLACE", "3RD PLACE"};
     private int currentDormIndex = 0;
     ImageView logoutButton;
+    
+    // Willow API integration
+    private WillowEnergyDataManager energyDataManager;
+    private boolean isWillowAuthenticated = false;
+    private boolean useRealData = false; // Toggle between real and simulated data
 
     // Meter components
     View meterFill;
     ImageView thresholdIndicator;
 
     // Meter configuration
-    private static final int MAX_USAGE = 400; // 400kw max
+    private static final int MAX_USAGE = 600; // 600kw max
     private static final int MIN_USAGE = 0;   // 0kw min
-    private int currentUsage = 280;  // Initial value, updated by live data
-    private int thresholdValue = 250; // Threshold at 250kw
+    private int currentUsage = 0;  // Initial value, updated by live data
+    private int thresholdValue = 300; // Threshold at 300kw
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +71,91 @@ public class DashboardActivity extends AppCompatActivity {
         random = new Random();
         decimalFormat = new DecimalFormat("#,##0");
         
+        // Validate BuildConfig environment variables
+        Log.d(TAG, "🔐 Environment Variables Status:");
+        Log.d(TAG, "  - Willow Base URL: " + (BuildConfig.WILLOW_BASE_URL.isEmpty() ? "❌ Missing" : "✅ Loaded"));
+        Log.d(TAG, "  - Client ID: " + (BuildConfig.WILLOW_CLIENT_ID.isEmpty() ? "❌ Missing" : "✅ Loaded (" + BuildConfig.WILLOW_CLIENT_ID.substring(0, 8) + "...)"));
+        Log.d(TAG, "  - Client Secret: " + (BuildConfig.WILLOW_CLIENT_SECRET.isEmpty() ? "❌ Missing" : "✅ Loaded"));
+        Log.d(TAG, "  - Twin IDs: " + 
+              (BuildConfig.TWIN_ID_TINSLEY.isEmpty() ? "❌" : "✅") + " Tinsley, " +
+              (BuildConfig.TWIN_ID_GABALDON.isEmpty() ? "❌" : "✅") + " Gabaldon, " +
+              (BuildConfig.TWIN_ID_SECHRIST.isEmpty() ? "❌" : "✅") + " Sechrist");
+        
+        // Initialize Willow API manager
+        initializeWillowApi();
+        
         Log.d(TAG, "Live data system initialized");
+    }
+    
+    /**
+     * Initialize Willow API integration
+     */
+    private void initializeWillowApi() {
+        try {
+            energyDataManager = new WillowEnergyDataManager();
+            
+            // Try to authenticate with stored credentials
+            authenticateWithWillow();
+            
+        } catch (Exception e) {
+            Log.w(TAG, "Failed to initialize Willow API, falling back to simulated data", e);
+            useRealData = false;
+        }
+    }
+    
+    /**
+     * Authenticate with Willow API
+     */
+    private void authenticateWithWillow() {
+        // Use credentials from BuildConfig (loaded from local.properties)
+        String clientId = BuildConfig.WILLOW_CLIENT_ID;
+        String clientSecret = BuildConfig.WILLOW_CLIENT_SECRET;
+        
+        // Validate that credentials are available
+        if (clientId == null || clientId.isEmpty() || clientSecret == null || clientSecret.isEmpty()) {
+            Log.e(TAG, "❌ Willow API credentials not found in BuildConfig. Check local.properties file.");
+            isWillowAuthenticated = false;
+            useRealData = false;
+            
+            runOnUiThread(() -> {
+                if (dashContentFragment != null) {
+                    dashContentFragment.updateYesterdaysTotal("API Credentials Missing ❌");
+                }
+            });
+            return;
+        }
+        
+        Log.d(TAG, "🔐 Authenticating with Client ID: " + clientId.substring(0, 8) + "...");
+        
+        energyDataManager.authenticate(clientId, clientSecret, new WillowEnergyDataManager.AuthenticationCallback() {
+            @Override
+            public void onSuccess(String token) {
+                Log.d(TAG, "✅ Willow API authentication successful!");
+                isWillowAuthenticated = true;
+                useRealData = true;
+                
+                runOnUiThread(() -> {
+                    // Update UI to indicate real data is being used
+                    if (dashContentFragment != null) {
+                        dashContentFragment.updateYesterdaysTotal("Connected to Willow API ✅");
+                    }
+                });
+            }
+            
+            @Override
+            public void onError(String error) {
+                Log.w(TAG, "❌ Willow API authentication failed: " + error);
+                isWillowAuthenticated = false;
+                useRealData = false;
+                
+                runOnUiThread(() -> {
+                    // Update UI to indicate simulated data
+                    if (dashContentFragment != null) {
+                        dashContentFragment.updateYesterdaysTotal("Using Simulated Data 🔄");
+                    }
+                });
+            }
+        });
     }
     
     private void setupNavigationButtons() {
@@ -82,6 +176,16 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DashboardActivity.this, ShopActivity.class);
                 startActivity(intent);
+            }
+        });
+        
+        // Add long press listener to access Willow API test interface
+        logoutButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, WillowApiV3TestActivity.class);
+                startActivity(intent);
+                return true;
             }
         });
     }
@@ -221,7 +325,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
     
     /**
-     * Update UI with fresh simulated live data
+     * Update UI with fresh live data (real or simulated)
      */
     private void updateUIWithLiveData() {
         if (dashContentFragment == null || !dashContentFragment.isAdded()) {
@@ -231,9 +335,94 @@ public class DashboardActivity extends AppCompatActivity {
             return;
         }
 
-        // Rotate through dorms every few updates (more frequent for testing)
+        // Rotate through dorms every few updates
         rotateDorm();
 
+        if (useRealData && isWillowAuthenticated) {
+            // Fetch real data from Willow API
+            fetchRealEnergyData();
+        } else {
+            // Use simulated data
+            updateWithSimulatedData();
+        }
+    }
+    
+    /**
+     * Fetch real energy data from Willow API
+     */
+    private void fetchRealEnergyData() {
+        String twinId = getCurrentBuildingTwinId();
+        
+        Log.d(TAG, "🌐 Fetching REAL energy data for " + currentDormName + " (Twin ID: " + twinId + ")");
+        
+        energyDataManager.getEnergyData(twinId, new WillowEnergyDataManager.EnergyDataCallback() {
+            @Override
+            public void onSuccess(EnergyDataResponse data) {
+                runOnUiThread(() -> {
+                    updateUIWithRealData(data);
+                });
+            }
+            
+            @Override
+            public void onError(String error) {
+                Log.w(TAG, "Failed to fetch real data, falling back to simulated: " + error);
+                runOnUiThread(() -> {
+                    // Fallback to simulated data
+                    updateWithSimulatedData();
+                });
+            }
+        });
+    }
+    
+    /**
+     * Update UI with real energy data from Willow API
+     */
+    private void updateUIWithRealData(EnergyDataResponse data) {
+        int liveUsage = data.getCurrentUsageAsInt();
+        
+        // Update the instance variable for meter updates
+        this.currentUsage = liveUsage;
+        
+        Log.d(TAG, "🌐 REAL DATA UPDATE: " + liveUsage + "kW for " + data.getBuildingName() + 
+              " (Status: " + data.getStatus() + ")");
+        
+        // Update current usage (main display)
+        dashContentFragment.updateCurrentUsage(liveUsage + "kW");
+        
+        // Update the energy meter with real usage
+        updateMeter(liveUsage, thresholdValue);
+        
+        // Update dorm status with position
+        String position = energyDataManager.getBuildingPosition(data.getBuildingName());
+        String statusText = data.getBuildingName() + " - " + (position != null ? position : "LIVE DATA");
+        dashContentFragment.updateDormStatus(statusText);
+        
+        // Use real potential energy if available
+        if (data.getPotentialEnergy() != null) {
+            dashContentFragment.updatePotentialEnergy(data.getPotentialEnergy().intValue() + " Potential Energy");
+        } else {
+            // Calculate potential energy based on real usage
+            int potentialEnergy = Math.max(0, 300 - (liveUsage - 200));
+            dashContentFragment.updatePotentialEnergy(potentialEnergy + " Potential Energy");
+        }
+        
+        // Display real daily total or calculated value
+        String dailyTotalText;
+        if (data.getDailyTotalKWh() != null) {
+            dailyTotalText = "Today's Total: " + decimalFormat.format(data.getDailyTotalAsInt()) + "kWh (Real Data ✅)";
+        } else {
+            int calculatedTotal = liveUsage * 24;
+            dailyTotalText = "Estimated Daily: " + decimalFormat.format(calculatedTotal) + "kWh (Calculated)";
+        }
+        dashContentFragment.updateYesterdaysTotal(dailyTotalText);
+        
+        Log.d(TAG, "✅ Real data update completed successfully - Next update in " + (UPDATE_INTERVAL/1000) + " seconds");
+    }
+    
+    /**
+     * Update UI with simulated data (fallback)
+     */
+    private void updateWithSimulatedData() {
         // Generate realistic energy usage data for current dorm
         int baseUsage = getBaseUsageForDorm(currentDormIndex);
         int liveUsage = baseUsage + random.nextInt(50) - 25; // ±25kW variation
@@ -241,7 +430,7 @@ public class DashboardActivity extends AppCompatActivity {
         // Update the instance variable for meter updates
         this.currentUsage = liveUsage;
 
-        Log.d(TAG, "🔄 LIVE UPDATE: " + liveUsage + "kW for " + currentDormName + " (Position: " + dormPositions[currentDormIndex] + ")");
+        Log.d(TAG, "🔄 SIMULATED UPDATE: " + liveUsage + "kW for " + currentDormName + " (Position: " + dormPositions[currentDormIndex] + ")");
 
         // Update current usage (main display)
         dashContentFragment.updateCurrentUsage(liveUsage + "kW");
@@ -253,15 +442,29 @@ public class DashboardActivity extends AppCompatActivity {
         String statusText = currentDormName + " - " + dormPositions[currentDormIndex];
         dashContentFragment.updateDormStatus(statusText);
 
-        // Calculate potential energy based on usage efficiency
-        int potentialEnergy = Math.max(0, 300 - (liveUsage - 200));
+        // Calculate potential energy based on efficiency (dynamic calculation)
+        int optimalUsage = (int) (baseUsage * 0.8); // 80% of base usage is optimal
+        int potentialEnergy = Math.max(0, (liveUsage > optimalUsage) ? 
+            (int)((double)(liveUsage - optimalUsage) / liveUsage * 1000) : 1000);
         dashContentFragment.updatePotentialEnergy(potentialEnergy + " Potential Energy");
 
         // Simulate yesterday's total
         int yesterdayTotal = liveUsage * 24 + random.nextInt(1000);
-        dashContentFragment.updateYesterdaysTotal("Yesterday's Total: " + decimalFormat.format(yesterdayTotal) + "kWh");
+        dashContentFragment.updateYesterdaysTotal("Yesterday's Total: " + decimalFormat.format(yesterdayTotal) + "kWh (Simulated 🔄)");
 
-        Log.d(TAG, "✅ Live data update completed successfully - Next update in " + (UPDATE_INTERVAL/1000) + " seconds");
+        Log.d(TAG, "✅ Simulated data update completed successfully - Next update in " + (UPDATE_INTERVAL/1000) + " seconds");
+    }
+    
+    /**
+     * Get current building twin ID based on rotation
+     */
+    private String getCurrentBuildingTwinId() {
+        switch (currentDormIndex) {
+            case 0: return WillowApiV3Config.TWIN_ID_TINSLEY;
+            case 1: return WillowApiV3Config.TWIN_ID_GABALDON;
+            case 2: return WillowApiV3Config.TWIN_ID_SECHRIST;
+            default: return WillowApiV3Config.TWIN_ID_TINSLEY;
+        }
     }
     
     /**
@@ -293,15 +496,24 @@ public class DashboardActivity extends AppCompatActivity {
     }
     
     /**
-     * Get base energy usage for different dorms (simulate different efficiency levels)
+     * Get base energy usage for different dorms (dynamic calculation based on real factors)
      */
     private int getBaseUsageForDorm(int dormIndex) {
+        // Dynamic calculation based on time of day and building characteristics
+        // This removes hardcoded values and makes it more realistic
+        int timeOfDayMultiplier = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY);
+        int baseLoad = 200 + (timeOfDayMultiplier * 5); // Base load varies with time
+        
+        // Building efficiency factor (based on actual building characteristics)
+        double efficiencyFactor = 1.0;
         switch (dormIndex) {
-            case 0: return 280; // Tinsley - most efficient (1st place)
-            case 1: return 315; // Gabaldon - medium efficiency (2nd place)
-            case 2: return 350; // Sechrist - least efficient (3rd place)
-            default: return 300;
+            case 0: efficiencyFactor = 0.85; // Tinsley - newer building, more efficient
+            case 1: efficiencyFactor = 1.0;  // Gabaldon - average efficiency
+            case 2: efficiencyFactor = 1.15; // Sechrist - older building, less efficient
+            default: efficiencyFactor = 1.0;
         }
+        
+        return (int) (baseLoad * efficiencyFactor);
     }
     
     @Override

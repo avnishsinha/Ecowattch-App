@@ -1,0 +1,34 @@
+## This file must *NOT* be checked into Version Control Systems,
+# as it contains information specific to your local configuration.
+#
+# Location of the SDK. This is only used by Gradle.
+# For customization when using a Version Control System, please read the
+# header note.
+sdk.dir=YOUR_ANDROID_SDK_PATH_HERE
+
+# =============================================================================
+# API KEYS AND SENSITIVE CONFIGURATION
+# =============================================================================
+# These values are loaded into BuildConfig and can be accessed in your app
+# NEVER commit this file to version control!
+
+# Database Configuration
+DB_USER=YOUR_DATABASE_USERNAME_HERE
+DB_PASSWORD=YOUR_DATABASE_PASSWORD_HERE
+DB_SERVER=YOUR_DATABASE_SERVER_HERE
+DB_DATABASE=YOUR_DATABASE_NAME_HERE
+DB_ENCRYPT=true
+
+# Willow API Configuration
+WILLOW_BASE_URL=https://your-organization.app.willowinc.com
+WILLOW_CLIENT_ID=your-willow-client-id-here
+WILLOW_CLIENT_SECRET=your-willow-client-secret-here
+
+# Building Twin IDs
+TWIN_ID_TINSLEY=your-tinsley-building-twin-id-here
+TWIN_ID_GABALDON=your-gabaldon-building-twin-id-here
+TWIN_ID_SECHRIST=your-sechrist-building-twin-id-here
+
+# Server Configuration
+SERVER_PORT=3000
+
