@@ -1,5 +1,7 @@
 package com.example.ecowattchtechdemo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,8 @@ public class ShopActivity extends AppCompatActivity {
     Button backButton;
     TextView tabPallets, tabOwned, tabMore;
     RecyclerView palletsRecycler, ownedRecycler;
+
+    TextView usernameText, dormitoryText;
 
     private ShopAdapter palletsAdapter;
     private ShopAdapter ownedAdapter;
@@ -34,6 +38,17 @@ public class ShopActivity extends AppCompatActivity {
         tabMore = findViewById(R.id.tab_more);
         palletsRecycler = findViewById(R.id.pallets_recycler);
         ownedRecycler = findViewById(R.id.owned_recycler);
+
+        usernameText = findViewById(R.id.username_text);
+        dormitoryText = findViewById(R.id.dormitory_text);
+
+        // load and display stored username/dormitory
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+        String username = prefs.getString("Username", "Valentino_Valero");
+        String dorm = prefs.getString("Dormitory", "Tinsley");
+
+        usernameText.setText(username);
+        dormitoryText.setText(dorm);
 
         // Back button functionality
         backButton.setOnClickListener(new View.OnClickListener() {

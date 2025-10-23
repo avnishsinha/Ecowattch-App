@@ -1,6 +1,7 @@
 package com.example.ecowattchtechdemo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +52,15 @@ public class LoginFragment extends Fragment {
                     if (response.isSuccessful() && response.body() != null) {
                         if ("success".equals(response.body().getStatus())) {
                             Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+
+                            //get the stuff from the response and put it into basically a global variable
+                            SharedPreferences prefs = requireActivity().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            LoginResponse body = response.body();
+                            editor.putString("Username", body.getUser().getUsername());
+                            editor.putString("Dormitory", body.getUser().getDormName());
+                            editor.apply();
+
                             // go to dashboard
                             Intent intent = new Intent(requireContext(), DashboardActivity.class);
                             startActivity(intent);

@@ -1,6 +1,8 @@
 package com.example.ecowattchtechdemo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +47,7 @@ public class SignupFragment extends Fragment {
         dormDropdown = view.findViewById(R.id.dormitory);
 
         // Setup dormitory dropdown with dorm options
-        // Using leaderboard dorms as placeholders (Tinsley, Mckay, Allen)
-        String[] dormitories = {"Tinsley", "Mckay", "Allen"};
+        String[] dormitories = {"Tinsley", "Gabaldon", "Sechrist"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_dropdown_item_1line,
@@ -64,6 +65,7 @@ public class SignupFragment extends Fragment {
             try {
                 jsonBody.put("usernames", username);
                 jsonBody.put("passwords", password);
+                jsonBody.put("dormitory", dormitory);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -73,6 +75,13 @@ public class SignupFragment extends Fragment {
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
                     response -> {
                         Toast.makeText(requireContext(), "Sign-up successful!", Toast.LENGTH_SHORT).show();
+
+                        //get the stuff from the sign up
+                        SharedPreferences prefs = requireActivity().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("Username", username);
+                        editor.putString("Dormitory", dormitory);
+                        editor.apply();
                     },
                     error -> {
                         String errorMsg = "Sign-up failed";

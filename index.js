@@ -16,7 +16,7 @@ app.post("/login", async (req, res) => {
       .request()
       .input("username", sql.NVarChar, usernames)
       .input("password", sql.NVarChar, passwords)
-      .query("SELECT * FROM LogIns WHERE usernames = @username AND passwords = @password");
+      .query("SELECT * FROM Users WHERE Username = @username AND PasswordHash = @password");
 
 
 
@@ -34,7 +34,7 @@ app.post("/login", async (req, res) => {
 // POST /signup
 app.post('/signup', async (req, res) => {
   try {
-    const { usernames, passwords } = req.body;
+    const { usernames, passwords, dormitory } = req.body;
 
     if (!usernames || !passwords) {
       return res.status(400).json({ status: 'error', message: 'Username and password required' });
@@ -45,7 +45,7 @@ app.post('/signup', async (req, res) => {
     // Check if username already exists
     const checkUser = await pool.request()
       .input('usernames', sql.NVarChar, usernames)
-      .query('SELECT * FROM LogIns WHERE usernames = @usernames');
+      .query('SELECT * FROM Users WHERE Username  = @usernames');
 
     if (checkUser.recordset.length > 0) {
       return res.status(409).json({ status: 'error', message: 'Username already exists' });
@@ -55,7 +55,8 @@ app.post('/signup', async (req, res) => {
     await pool.request()
       .input('username', sql.NVarChar, usernames)
       .input('password', sql.NVarChar, passwords)
-      .query('INSERT INTO LogIns (usernames, passwords) VALUES (@username, @password)');
+      .input('dorm', sql.NVarChar, dormitory)
+      .query('INSERT INTO Users (Username, PasswordHash, DormName) VALUES (@username, @password, @dorm)');
 
     res.status(201).json({ status: 'success', message: 'User created successfully' });
 
