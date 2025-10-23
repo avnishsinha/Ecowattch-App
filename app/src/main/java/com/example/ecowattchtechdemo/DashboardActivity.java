@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.content.Intent;
 import android.widget.LinearLayout;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -21,7 +23,13 @@ import com.example.ecowattchtechdemo.willow.WillowEnergyDataManager;
 import com.example.ecowattchtechdemo.willow.WillowApiV3Config;
 import com.example.ecowattchtechdemo.willow.models.EnergyDataResponse;
 
-public class DashboardActivity extends AppCompatActivity {
+// Theme imports
+import com.example.ecowattchtechdemo.theme.ThemeManager;
+import com.example.ecowattchtechdemo.theme.ColorPalette;
+import com.example.ecowattchtechdemo.theme.ThemeChangeListener;
+import com.example.ecowattchtechdemo.theme.ThemeApplier;
+
+public class DashboardActivity extends AppCompatActivity implements ThemeChangeListener {
     private static final String TAG = "DashboardActivity";
     
     LinearLayout records, shop;
@@ -45,9 +53,15 @@ public class DashboardActivity extends AppCompatActivity {
     private boolean isWillowAuthenticated = false;
     private boolean useRealData = false; // Toggle between real and simulated data
 
+    // Theme management
+    private ThemeManager themeManager;
+
     // Meter components
     View meterFill;
     ImageView thresholdIndicator;
+
+    // Background and button components
+    View backgroundGradientCircle;
 
     // Meter configuration
     private static final int MAX_USAGE = 600; // 600kw max
@@ -64,13 +78,23 @@ public class DashboardActivity extends AppCompatActivity {
         setupNavigationButtons();
         setupFragment(savedInstanceState);
         startLiveDataUpdates();
+
+        // Register as theme change listener
+        if (themeManager != null) {
+            themeManager.addThemeChangeListener(this);
+            // Apply current theme colors on first load
+            updateBackgroundAndGradient();
+        }
     }
     
     private void initializeComponents() {
         updateHandler = new Handler(Looper.getMainLooper());
         random = new Random();
         decimalFormat = new DecimalFormat("#,##0");
-        
+
+        // Initialize theme manager (singleton)
+        themeManager = ThemeManager.getInstance(this);
+
         // Validate BuildConfig environment variables
         Log.d(TAG, "🔐 Environment Variables Status:");
         Log.d(TAG, "  - Willow Base URL: " + (BuildConfig.WILLOW_BASE_URL.isEmpty() ? "❌ Missing" : "✅ Loaded"));
@@ -162,6 +186,11 @@ public class DashboardActivity extends AppCompatActivity {
         records = findViewById(R.id.records_button);
         shop = findViewById(R.id.shop_button);
         logoutButton = findViewById(R.id.logout_button);
+
+        // Apply theme accent color to logout button
+        if (themeManager != null && logoutButton != null) {
+            logoutButton.setColorFilter(themeManager.getAccentColor());
+        }
 
         records.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,25 +302,60 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     /**
-     * Calculate meter color based on usage percentage
-     * Pastel Green (low usage) -> Pastel Yellow (medium) -> Pastel Red (high usage)
+     * Calculate meter color based on usage percentage and current theme
+     * Low usage -> Medium usage -> High usage (colors from current palette)
      */
     private int getMeterColor(float percentage) {
-        if (percentage < 0.5f) {
-            // Pastel Green to Pastel Yellow (0-50%)
-            float localPercentage = percentage * 2; // 0-1 range
-            int red = 120 + (int) (localPercentage * 135);  // 120-255
-            int green = 220 + (int) (localPercentage * 35); // 220-255
-            int blue = 100 - (int) (localPercentage * 50);   // 100-50
-            return Color.rgb(red, green, blue);
-        } else {
-            // Pastel Yellow to Pastel Red (50-100%)
-            float localPercentage = (percentage - 0.5f) * 2; // 0-1 range
-            int red = 255;
-            int green = 255 - (int) (localPercentage * 105); // 255-150
-            int blue = 50 - (int) (localPercentage * 50);    // 50-0
-            return Color.rgb(red, green, blue);
+        if (themeManager == null) {
+            // Fallback to default colors if theme manager isn't initialized
+            if (percentage < 0.5f) {
+                float localPercentage = percentage * 2;
+                int red = 120 + (int) (localPercentage * 135);
+                int green = 220 + (int) (localPercentage * 35);
+                int blue = 100 - (int) (localPercentage * 50);
+                return Color.rgb(red, green, blue);
+            } else {
+                float localPercentage = (percentage - 0.5f) * 2;
+                int red = 255;
+                int green = 255 - (int) (localPercentage * 105);
+                int blue = 50 - (int) (localPercentage * 50);
+                return Color.rgb(red, green, blue);
+            }
         }
+
+        // Get colors from current theme palette
+        int meterLow = themeManager.getMeterLow();
+        int meterMid = themeManager.getMeterMid();
+        int meterHigh = themeManager.getMeterHigh();
+
+        if (percentage < 0.5f) {
+            // Interpolate between meterLow and meterMid (0-50%)
+            float localPercentage = percentage * 2; // 0-1 range
+            return interpolateColor(meterLow, meterMid, localPercentage);
+        } else {
+            // Interpolate between meterMid and meterHigh (50-100%)
+            float localPercentage = (percentage - 0.5f) * 2; // 0-1 range
+            return interpolateColor(meterMid, meterHigh, localPercentage);
+        }
+    }
+
+    /**
+     * Interpolate between two colors
+     */
+    private int interpolateColor(int colorFrom, int colorTo, float percentage) {
+        int redFrom = Color.red(colorFrom);
+        int greenFrom = Color.green(colorFrom);
+        int blueFrom = Color.blue(colorFrom);
+
+        int redTo = Color.red(colorTo);
+        int greenTo = Color.green(colorTo);
+        int blueTo = Color.blue(colorTo);
+
+        int red = (int) (redFrom + (redTo - redFrom) * percentage);
+        int green = (int) (greenFrom + (greenTo - greenFrom) * percentage);
+        int blue = (int) (blueFrom + (blueTo - blueFrom) * percentage);
+
+        return Color.rgb(red, green, blue);
     }
 
     /**
@@ -515,10 +579,49 @@ public class DashboardActivity extends AppCompatActivity {
         
         return (int) (baseLoad * efficiencyFactor);
     }
-    
+
+
+    @Override
+    public void onThemeChanged(String newPaletteName) {
+        Log.d(TAG, "onThemeChanged called: " + newPaletteName);
+
+        // Update background and gradient circle
+        updateBackgroundAndGradient();
+
+        // Update logout button color
+        if (logoutButton != null) {
+            logoutButton.setColorFilter(themeManager.getAccentColor());
+            Log.d(TAG, "Updated logout button color");
+        }
+
+        // Update the meter with current usage (will use new palette colors)
+        Log.d(TAG, "Updating meter colors");
+        updateMeter(currentUsage, thresholdValue);
+
+        // Apply theme colors to fragment (text colors, accent elements)
+        Log.d(TAG, "Fragment is added: " + (dashContentFragment != null && dashContentFragment.isAdded()));
+        if (dashContentFragment != null && dashContentFragment.isAdded()) {
+            Log.d(TAG, "Calling applyThemeColors on fragment");
+            dashContentFragment.applyThemeColors();
+        }
+    }
+
+    /**
+     * Update the background and gradient circle colors based on current theme
+     */
+    private void updateBackgroundAndGradient() {
+        ThemeApplier.applyThemeToActivity(this, themeManager);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        // Unregister theme change listener
+        if (themeManager != null) {
+            themeManager.removeThemeChangeListener(this);
+        }
+
         // Clean up the update handler
         if (updateHandler != null) {
             updateHandler.removeCallbacksAndMessages(null);

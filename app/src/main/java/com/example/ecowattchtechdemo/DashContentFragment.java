@@ -5,17 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.ecowattchtechdemo.theme.ThemeManager;
+
 public class DashContentFragment extends Fragment {
-    
+
     private TextView usernameText;
     private TextView currentUsageText;
     private TextView yesterdaysTotalText;
     private TextView potentialEnergyText;
+    private TextView usageUnitText;
+    private TextView potentialEnergyLabelText;
+    private TextView refreshButton;
+    private LinearLayout potentialEnergyPill;
+    private ThemeManager themeManager;
     
     @Nullable
     @Override
@@ -24,12 +32,14 @@ public class DashContentFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dash_content, container, false);
     }
-    
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Initialize all TextViews after view is created
         initializeViews(view);
+        // Apply theme colors immediately
+        applyThemeColors();
     }
     
     private void initializeViews(View view) {
@@ -37,7 +47,15 @@ public class DashContentFragment extends Fragment {
         currentUsageText = view.findViewById(R.id.current_usage_text);
         yesterdaysTotalText = view.findViewById(R.id.yesterdays_total_text);
         potentialEnergyText = view.findViewById(R.id.potential_energy_text);
-        
+        usageUnitText = view.findViewById(R.id.usage_unit_text);
+        potentialEnergyLabelText = view.findViewById(R.id.potential_energy_label);
+        refreshButton = view.findViewById(R.id.refresh_button);
+
+        // Initialize theme manager (singleton)
+        if (getActivity() != null) {
+            themeManager = ThemeManager.getInstance(getActivity());
+        }
+
         // Make the usage text clickable for manual refresh
         if (currentUsageText != null) {
             currentUsageText.setOnClickListener(v -> {
@@ -46,15 +64,51 @@ public class DashContentFragment extends Fragment {
                 }
             });
         }
-        
+
         // Set up refresh button
-        View refreshButton = view.findViewById(R.id.refresh_button);
         if (refreshButton != null) {
             refreshButton.setOnClickListener(v -> {
                 if (getActivity() instanceof DashboardActivity) {
                     ((DashboardActivity) getActivity()).manualRefresh();
                 }
             });
+        }
+    }
+
+    /**
+     * Apply current theme colors to all UI elements
+     */
+    public void applyThemeColors() {
+        if (themeManager == null || getActivity() == null) {
+            android.util.Log.d("DashContentFragment", "applyThemeColors skipped: themeManager=" + (themeManager == null) + ", activity=" + (getActivity() == null));
+            return;
+        }
+
+        int accentColor = themeManager.getAccentColor();
+        android.util.Log.d("DashContentFragment", "applyThemeColors: accentColor=0x" + Integer.toHexString(accentColor));
+
+        // Apply accent color to dorm name (e.g., "TINSLEY")
+        if (usernameText != null) {
+            usernameText.setTextColor(accentColor);
+            android.util.Log.d("DashContentFragment", "Updated usernameText color");
+        }
+
+        // Apply accent color to the "kw" unit text
+        if (usageUnitText != null) {
+            usageUnitText.setTextColor(accentColor);
+            android.util.Log.d("DashContentFragment", "Updated usageUnitText color");
+        }
+
+        // Apply accent color to potential energy number
+        if (potentialEnergyText != null) {
+            potentialEnergyText.setTextColor(accentColor);
+            android.util.Log.d("DashContentFragment", "Updated potentialEnergyText color");
+        }
+
+        // Apply accent color to refresh button
+        if (refreshButton != null) {
+            refreshButton.setTextColor(accentColor);
+            android.util.Log.d("DashContentFragment", "Updated refreshButton color");
         }
     }
     

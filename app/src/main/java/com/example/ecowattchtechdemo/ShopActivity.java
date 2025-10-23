@@ -9,11 +9,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.view.ViewGroup;
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopActivity extends AppCompatActivity {
+import com.example.ecowattchtechdemo.theme.ColorPalette;
+import com.example.ecowattchtechdemo.theme.Palettes;
+import com.example.ecowattchtechdemo.theme.ThemeManager;
+import com.example.ecowattchtechdemo.theme.ThemeChangeListener;
+import com.example.ecowattchtechdemo.theme.ThemeApplier;
+
+public class ShopActivity extends AppCompatActivity implements ThemeChangeListener {
+    private static final String TAG = "ShopActivity";
     Button backButton;
     TextView tabPallets, tabOwned, tabMore;
     RecyclerView palletsRecycler, ownedRecycler;
@@ -26,10 +37,15 @@ public class ShopActivity extends AppCompatActivity {
     private List<ShopItem> palletsList;
     private List<ShopItem> ownedList;
 
+    private ThemeManager themeManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+
+        // Initialize theme manager (singleton)
+        themeManager = ThemeManager.getInstance(this);
 
         // Initialize views
         backButton = findViewById(R.id.back_button);
@@ -66,21 +82,57 @@ public class ShopActivity extends AppCompatActivity {
 
         // Setup tab click listeners
         setupTabs();
+
+        // Register as theme change listener and apply initial theme
+        if (themeManager != null) {
+            themeManager.addThemeChangeListener(this);
+            onThemeChanged(themeManager.getCurrentPaletteName());
+        }
     }
 
     private void initializeSampleData() {
-        // Sample palette data - AND HERE
+        // Initialize with real palettes from theme system
         palletsList = new ArrayList<>();
-        palletsList.add(new ShopItem("PEACH", 400, R.drawable.gradient_circle_extended));
-        palletsList.add(new ShopItem("OCEAN", 500, R.drawable.gradient_circle_extended));
-        palletsList.add(new ShopItem("SUNSET", 600, R.drawable.gradient_circle_extended));
-        palletsList.add(new ShopItem("FOREST", 450, R.drawable.gradient_circle_extended));
-        palletsList.add(new ShopItem("LAVENDER", 550, R.drawable.gradient_circle_extended));
 
-        // Sample owned items - backend will replace with user's owned items
+        // Add all available palettes with gradient circle colors
+        for (ColorPalette palette : Palettes.getAllPalettes()) {
+            ShopItem item = new ShopItem(
+                    palette.name,
+                    400,  // TODO: BACKEND - Set actual prices per palette
+                    R.drawable.gradient_circle_extended,
+                    palette.name,
+                    palette.accentColor,
+                    palette.circleGradientLight,
+                    palette.circleGradientDark
+            );
+            palletsList.add(item);
+        }
+
+        // Load owned palettes from theme preferences
         ownedList = new ArrayList<>();
-        ownedList.add(new ShopItem("PEACH", 400, R.drawable.gradient_circle_extended));
-        ownedList.get(0).setOwned(true);
+        String currentPaletteId = themeManager.getCurrentPaletteName();
+
+        // TODO: BACKEND - Load actual owned palettes from server
+        // For now, all palettes are owned (but only PEACH by default)
+        for (ColorPalette palette : Palettes.getAllPalettes()) {
+            ShopItem ownedItem = new ShopItem(
+                    palette.name,
+                    400,
+                    R.drawable.gradient_circle_extended,
+                    palette.name,
+                    palette.accentColor,
+                    palette.circleGradientLight,
+                    palette.circleGradientDark
+            );
+            ownedItem.setOwned(true);
+
+            // Mark currently selected palette
+            if (palette.name.equals(currentPaletteId)) {
+                ownedItem.setSelected(true);
+            }
+
+            ownedList.add(ownedItem);
+        }
     }
 
     private void setupRecyclerViews() {
@@ -92,9 +144,14 @@ public class ShopActivity extends AppCompatActivity {
         palletsAdapter = new ShopAdapter(palletsList, new ShopAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ShopItem item, int position) {
-                // Handle item click - backend can add purchase logic here - Risa you use palette handler here)
+                // Handle palette purchase attempt
+                // TODO: BACKEND - Implement actual purchase logic with energy cost
+                if (item.getPaletteId() != null) {
+                    // For now, allow selection of any palette (backend will handle purchase)
+                    selectPalette(item.getPaletteId());
+                }
             }
-        });
+        }, this);
         palletsRecycler.setAdapter(palletsAdapter);
 
         // Setup Owned RecyclerView with horizontal layout
@@ -105,10 +162,43 @@ public class ShopActivity extends AppCompatActivity {
         ownedAdapter = new ShopAdapter(ownedList, new ShopAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ShopItem item, int position) {
-                // Handle owned item click - MORE BACKEND HERE
+                // Handle owned palette selection - apply the theme immediately
+                if (item.getPaletteId() != null) {
+                    selectPalette(item.getPaletteId());
+                }
             }
-        });
+        }, this);
         ownedRecycler.setAdapter(ownedAdapter);
+    }
+
+    /**
+     * Select and apply a palette theme
+     * This method saves the selection and triggers live theme application
+     */
+    private void selectPalette(String paletteId) {
+        themeManager.setPalette(paletteId);
+
+        // Show confirmation toast
+        Toast.makeText(this, paletteId + " palette selected! 🎨", Toast.LENGTH_SHORT).show();
+
+        // Update owned list to show current selection
+        updateOwnedListSelection();
+        ownedAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Update owned list to mark the currently selected palette
+     */
+    private void updateOwnedListSelection() {
+        String currentPalette = themeManager.getCurrentPaletteName();
+
+        for (ShopItem item : ownedList) {
+            if (item.getPaletteId() != null && item.getPaletteId().equals(currentPalette)) {
+                item.setSelected(true);
+            } else {
+                item.setSelected(false);
+            }
+        }
     }
 
     private void setupTabs() {
@@ -152,5 +242,19 @@ public class ShopActivity extends AppCompatActivity {
 
         // Set selected tab to bold
         selectedTab.setTypeface(null, Typeface.BOLD);
+    }
+
+    @Override
+    public void onThemeChanged(String newPaletteName) {
+        Log.d(TAG, "onThemeChanged called: " + newPaletteName);
+        ThemeApplier.applyThemeToActivity(this, themeManager);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (themeManager != null) {
+            themeManager.removeThemeChangeListener(this);
+        }
     }
 }

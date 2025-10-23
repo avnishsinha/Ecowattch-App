@@ -10,6 +10,7 @@
 
     <!-- Gradient Background Circle -->
     <View
+        android:id="@+id/gradient_circle_background"
         android:layout_width="600dp"
         android:layout_height="500dp"
         android:layout_centerInParent="true"

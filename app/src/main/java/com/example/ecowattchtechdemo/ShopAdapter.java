@@ -1,5 +1,7 @@
 package com.example.ecowattchtechdemo;
 
+import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+import com.example.ecowattchtechdemo.theme.ThemeManager;
+
 /**
  * RecyclerView adapter for displaying shop items in a horizontal scrolling list
  * Backend can modify the click listener to integrate with purchase/selection logic
@@ -17,11 +21,19 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
 
     private List<ShopItem> shopItems;
     private OnItemClickListener clickListener;
+    private ThemeManager themeManager;
 
     public interface OnItemClickListener {
         void onItemClick(ShopItem item, int position);
     }
 
+    public ShopAdapter(List<ShopItem> shopItems, OnItemClickListener clickListener, Context context) {
+        this.shopItems = shopItems;
+        this.clickListener = clickListener;
+        this.themeManager = ThemeManager.getInstance(context);
+    }
+
+    // Legacy constructor for backward compatibility
     public ShopAdapter(List<ShopItem> shopItems, OnItemClickListener clickListener) {
         this.shopItems = shopItems;
         this.clickListener = clickListener;
@@ -64,8 +76,23 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
             itemName.setText(item.getName());
             itemPrice.setText(item.getPriceText());
 
-            // Set the color preview background
-            if (item.getColorResource() != 0) {
+            // Set the color preview circle with gradient matching the palette
+            if (item.getCircleGradientLight() != 0 && item.getCircleGradientDark() != 0) {
+                // Create a radial gradient drawable for the circle
+                GradientDrawable drawable = new GradientDrawable(
+                        GradientDrawable.Orientation.TL_BR,
+                        new int[]{item.getCircleGradientLight(), item.getCircleGradientDark()}
+                );
+                drawable.setShape(GradientDrawable.OVAL);
+                itemColorPreview.setBackground(drawable);
+            } else if (item.getAccentColor() != 0) {
+                // Fallback: create solid circle using accent color
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.OVAL);
+                drawable.setColor(item.getAccentColor());
+                itemColorPreview.setBackground(drawable);
+            } else if (item.getColorResource() != 0) {
+                // Fallback to resource if accent color is not set
                 itemColorPreview.setBackgroundResource(item.getColorResource());
             }
 
