@@ -26,8 +26,8 @@
 
     <style name="Theme.Peach">
         <item name="android:colorBackground">@color/background_dark</item>
-        <item name="android:textColorPrimary">@color/text_primary</item>
-        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorPrimary">@color/primary_color</item>
+        <item name="android:textColorSecondary">@color/secondary_color</item>
         <item name="android:textColorTertiary">@color/accent_color</item>
         <item name="android:panelBackground">@color/background_light</item>
         <item name="android:colorAccent">@color/accent_color</item>
