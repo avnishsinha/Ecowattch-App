@@ -25,7 +25,7 @@ public class ShopActivity extends AppCompatActivity {
 
     private List<ShopItem> palletsList;
     private List<ShopItem> ownedList;
-    
+
     // theme manager
     ThemeManager tm = new ThemeManager(this);
 
