@@ -17,6 +17,7 @@
         <!-- Dorm Status -->
         <TextView
             android:id="@+id/username_text"
+            android:tag="primary_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -35,6 +36,7 @@
 
             <TextView
                 android:id="@+id/current_usage_text"
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
@@ -44,6 +46,7 @@
 
             <TextView
                 android:id="@+id/usage_unit_text"
+                android:tag="accent_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
@@ -58,12 +61,13 @@
         <!-- Yesterday's Total -->
         <TextView
             android:id="@+id/yesterdays_total_text"
+            android:tag="secondary_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/matrixtype_display"
             android:text="Yesterdays Total: 5297kwh"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/secondary_color"
             android:textSize="12sp" />
 
         <!-- Potential Energy Pill -->
@@ -78,6 +82,7 @@
 
             <TextView
                 android:id="@+id/potential_energy_text"
+                android:tag="accent_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
@@ -88,6 +93,7 @@
 
             <TextView
                 android:id="@+id/potential_energy_label"
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
@@ -100,6 +106,7 @@
 
         <!-- Leaderboard -->
         <TextView
+            android:tag="primary_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -118,6 +125,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -127,6 +135,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
@@ -137,6 +146,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtyp_display_bold"
@@ -156,6 +166,7 @@
             
             <TextView
                 android:id="@+id/refresh_button"
+                android:tag="accent_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/pill_background"
