@@ -28,7 +28,6 @@ public class ThemeManager {
     /**
      * applyTheme() - call in onCreate(), after setContentView().
      * or just anytime the theme is changed.
-     * code to call the function correctly: new ThemeManager(this).applyTheme();
      */
     public void applyTheme() {
         Map<String, Integer> themeColors = loadThemeColorsFromPrefs(context);
@@ -42,7 +41,7 @@ public class ThemeManager {
         Map<String, Integer> themeColors = new HashMap<>();
 
         // Safely parse color strings (fall back to defaults)
-        // tag everything in activities that needs to change using these keys
+        // tag everything in activities that needs to change, using these keys
         themeColors.put("primary_color", Color.parseColor(prefs.getString("primary_color", "#FFFFFF")));
         themeColors.put("secondary_color", Color.parseColor(prefs.getString("secondary_color", "#AAAAAA")));
         themeColors.put("accent_color", Color.parseColor(prefs.getString("accent_color", "#CD232E")));
@@ -65,8 +64,8 @@ public class ThemeManager {
             // determine type of view so color can be set
             if (view instanceof TextView) {
                 ((TextView) view).setTextColor(color);
-            } else if (view instanceof Button) {
-                ((Button) view).setBackgroundTintList(ColorStateList.valueOf(color));
+            // } else if (view instanceof Button) {
+                // ((Button) view).setBackgroundTintList(ColorStateList.valueOf(color));
                 // make sure it can change text on buttons
             } else if (view instanceof ImageView) {
                 ((ImageView) view).setColorFilter(color);
@@ -74,6 +73,8 @@ public class ThemeManager {
                 view.setBackgroundColor(color);
             }
             // how??? gradient?????
+            // TextInputLayout
+            // TextInputEditText
         }
 
         // recursion

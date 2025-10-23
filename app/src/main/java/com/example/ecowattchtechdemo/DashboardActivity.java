@@ -305,29 +305,6 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Change app theme
-     */
-    private void applyTheme() {
-        SharedPreferences prefs = getSharedPreferences("ThemePref", MODE_PRIVATE);
-
-        int backgroundDark = Color.parseColor(prefs.getString("background_dark", "#1B1B1B"));
-        int backgroundLight = Color.parseColor(prefs.getString("background_light", "#262626"));
-        int primaryColor = Color.parseColor(prefs.getString("primary_color", "#FFFFFF"));
-        int secondaryColor = Color.parseColor(prefs.getString("secondary_color", "#AAAAAA"));
-        int accentColor = Color.parseColor(prefs.getString("accent_color", "#CD232E"));
-
-        // backgrounds
-        findViewById(android.R.id.background).setBackgroundColor(backgroundDark);
-        // TODO background circle
-
-        // buttons
-
-        // text
-
-        // modal text
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
