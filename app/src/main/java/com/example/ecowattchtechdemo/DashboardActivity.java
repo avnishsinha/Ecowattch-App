@@ -46,6 +46,9 @@ public class DashboardActivity extends AppCompatActivity {
     private int currentUsage = 280;  // Initial value, updated by live data
     private int thresholdValue = 250; // Threshold at 250kw
 
+    // theme manager
+    ThemeManager tm = new ThemeManager(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,8 @@ public class DashboardActivity extends AppCompatActivity {
         setupNavigationButtons();
         setupFragment(savedInstanceState);
         startLiveDataUpdates();
+
+        tm.applyTheme();
     }
     
     private void initializeComponents() {

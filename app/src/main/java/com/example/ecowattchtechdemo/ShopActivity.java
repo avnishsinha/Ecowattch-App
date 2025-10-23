@@ -23,6 +23,7 @@ public class ShopActivity extends AppCompatActivity {
     private List<ShopItem> palletsList;
     private List<ShopItem> ownedList;
 
+    // theme manager
     ThemeManager tm = new ThemeManager(this);
 
     @Override
@@ -54,6 +55,9 @@ public class ShopActivity extends AppCompatActivity {
 
         // Setup tab click listeners
         setupTabs();
+
+        // apply theme if changed
+        tm.applyTheme();
     }
 
     private void initializeSampleData() {
@@ -83,10 +87,10 @@ public class ShopActivity extends AppCompatActivity {
                 // Handle item click - backend can add purchase logic here - Risa you use palette handler here)
 
                 // get color values from backend, store in SharedPreferences
-                // temp: (replace hardcoded hex codes with values pulled from db)
                 SharedPreferences prefs = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
 
+                // temp: (replace hardcoded hex codes with values pulled from db)
                 editor.putString("primary_color", "#FFFFFF");
                 editor.putString("secondary_color", "#AAAAAA");
                 editor.putString("accent_color", "#CD232E");
