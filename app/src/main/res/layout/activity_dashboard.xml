@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/background"
+    android:tag="background_dark"
     android:background="@color/background_dark">
 
     <!-- Gradient Background Circle -->
@@ -21,6 +21,7 @@
     <!-- Logout Button (Top Right) -->
     <ImageView
         android:id="@+id/logout_button"
+        android:tag="accent_color"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"
@@ -68,6 +69,7 @@
 
         <!-- Threshold Triangle -->
         <ImageView
+            android:tag="primary_color"
             android:id="@+id/threshold_indicator"
             android:layout_width="16dp"
             android:layout_height="16dp"
@@ -112,6 +114,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:tag="primary_color"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
@@ -165,6 +168,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:tag="primary_color"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="8dp"
@@ -219,6 +223,7 @@
 
             <ImageView
                 android:id="@+id/tab_alerts"
+                android:tag="accent_color"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
@@ -229,6 +234,7 @@
 
             <ImageView
                 android:id="@+id/tab_notifications"
+                android:tag="primary_color"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
@@ -239,6 +245,7 @@
 
             <ImageView
                 android:id="@+id/tab_settings"
+                android:tag="primary_color"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
@@ -249,6 +256,7 @@
 
             <ImageView
                 android:id="@+id/tab_profile"
+                android:tag="primary_color"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/button_background"

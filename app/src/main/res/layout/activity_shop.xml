@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:tag="background_dark"
     android:background="@color/background_dark">
 
     <!-- Gradient Background Circle -->
@@ -29,6 +30,7 @@
 
         <!-- User Avatar -->
         <ImageView
+            android:tag="primary_color"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="16dp"
@@ -46,6 +48,7 @@
 
             <TextView
                 android:id="@+id/username_text"
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
@@ -56,6 +59,7 @@
 
             <TextView
                 android:id="@+id/dormitory_text"
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/matrixtype_display"
@@ -95,6 +99,7 @@
 
                 <TextView
                     android:id="@+id/energy_points_text"
+                    android:tag="primary_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/matrixtype_display"
@@ -104,6 +109,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:tag="primary_color"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginStart="8dp"
@@ -114,6 +120,7 @@
 
             <Button
                 android:id="@+id/back_button"
+                android:tag="primary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background"
@@ -133,6 +140,7 @@
 
             <TextView
                 android:id="@+id/tab_pallets"
+                android:tag="primary_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -148,6 +156,7 @@
 
             <TextView
                 android:id="@+id/tab_owned"
+                android:tag="primary_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
@@ -162,6 +171,7 @@
 
             <TextView
                 android:id="@+id/tab_more"
+                android:tag="primary_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

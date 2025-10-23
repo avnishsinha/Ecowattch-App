@@ -67,11 +67,13 @@ public class ThemeManager {
                 ((TextView) view).setTextColor(color);
             } else if (view instanceof Button) {
                 ((Button) view).setBackgroundTintList(ColorStateList.valueOf(color));
+                // make sure it can change text on buttons
             } else if (view instanceof ImageView) {
                 ((ImageView) view).setColorFilter(color);
             } else {
                 view.setBackgroundColor(color);
             }
+            // how??? gradient?????
         }
 
         // recursion
