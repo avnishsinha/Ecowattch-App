@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:tag="background_dark"
     android:background="@color/background_dark">
 
     <!-- Gradient Background Circle -->
