@@ -25,6 +25,8 @@ public class LoginFragment extends Fragment {
     Button loginButton;
     TextView signupLink;
     TextInputEditText loginUser, loginPass;
+    // theme manager
+    ThemeManager tm;
 
     @Nullable
     @Override
@@ -96,5 +98,13 @@ public class LoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        tm = new ThemeManager(requireContext());
+        tm.applyTheme();
     }
 }
