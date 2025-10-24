@@ -2,6 +2,7 @@ package com.example.ecowattchtechdemo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -87,12 +88,12 @@ public class ShopActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
-        tm.applyTheme(this);
+        tm.applyTheme();
     }
 
     protected void onResume() {
         super.onResume();
-        tm.applyTheme(this);
+        tm.applyTheme();
     }
 
     private void initializeSampleData() {
@@ -103,13 +104,15 @@ public class ShopActivity extends AppCompatActivity {
         palletsList.add(new ShopItem("GREEN", 600, R.drawable.gradient_circle_extended));
         palletsList.add(new ShopItem("MAGENTA", 450, R.drawable.gradient_circle_extended));
         palletsList.add(new ShopItem("CYAN", 550, R.drawable.gradient_circle_extended));
+        palletsList.get(0).setOwned(true);
+        palletsList.get(1).setOwned(true);
 
         // Sample owned items - backend will replace with user's owned items
         ownedList = new ArrayList<>();
         ownedList.add(new ShopItem("PEACH", 400, R.drawable.gradient_circle_extended));
         ownedList.get(0).setOwned(true);
         ownedList.add(new ShopItem("BLUE", 500, R.drawable.gradient_circle_extended));
-        ownedList.get(0).setOwned(true);
+        ownedList.get(1).setOwned(true);
     }
 
     private void setupRecyclerViews() {
@@ -124,24 +127,29 @@ public class ShopActivity extends AppCompatActivity {
                 // Handle item click - backend can add purchase logic here - Risa you use palette handler here)
 
                 // get colors for clicked palette
+                // TEMP/TODO: get colors[] from backend
                 String[] colors = paletteColors.get(item.getName());
                 if (colors == null || colors.length < 5) return;
 
-                // get color values from backend, store in SharedPreferences
-                SharedPreferences prefs = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
+                // check for owned - only select if palette is owned
+                if (item.isOwned()) {
+                    // get color values from backend, store in SharedPreferences
+                    SharedPreferences prefs = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
 
-                // temp: (replace hardcoded hex codes with values pulled from db)
-                editor.putString("primary_color", colors[0]);
-                editor.putString("secondary_color", colors[1]);
-                editor.putString("accent_color", colors[2]);
-                editor.putString("background_main", colors[3]);
-                editor.putString("background_light", colors[4]);
+                    editor.putString("primary_color", colors[0]);
+                    editor.putString("secondary_color", colors[1]);
+                    editor.putString("accent_color", colors[2]);
+                    editor.putString("background_main", colors[3]);
+                    editor.putString("background_light", colors[4]);
 
-                editor.apply();
+                    editor.apply();
 
-                // apply theme
-                onResume();
+                    // apply theme
+                    onResume();
+                } else {
+                    previewPalette(colors);
+                }
             }
         });
         palletsRecycler.setAdapter(palletsAdapter);
@@ -158,6 +166,23 @@ public class ShopActivity extends AppCompatActivity {
             }
         });
         ownedRecycler.setAdapter(ownedAdapter);
+    }
+
+    private void previewPalette(String[] colors) {
+        // temporary color map
+        Map<String, Integer> previewColors = new HashMap<>();
+        previewColors.put("primary_color", Color.parseColor(colors[0]));
+        previewColors.put("secondary_color", Color.parseColor(colors[1]));
+        previewColors.put("accent_color", Color.parseColor(colors[2]));
+        previewColors.put("primary_text", Color.parseColor(colors[0]));
+        previewColors.put("secondary_text", Color.parseColor(colors[1]));
+        previewColors.put("accent_text", Color.parseColor(colors[2]));
+        previewColors.put("background_main", Color.parseColor(colors[3]));
+        previewColors.put("background_light", Color.parseColor(colors[4]));
+
+        // apply preview colors
+        ThemeManager themeManager = new ThemeManager(this);
+        themeManager.applyTheme(previewColors);
     }
 
     private void setupTabs() {
