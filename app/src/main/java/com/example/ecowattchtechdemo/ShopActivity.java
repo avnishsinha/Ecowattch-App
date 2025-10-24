@@ -71,7 +71,7 @@ public class ShopActivity extends AppCompatActivity {
         setupTabs();
 
         // apply theme if changed
-        tm.applyTheme();
+        tm.applyTheme(this);
     }
 
     private void initializeSampleData() {
@@ -114,7 +114,8 @@ public class ShopActivity extends AppCompatActivity {
                 editor.apply();
 
                 // apply theme
-                tm.applyTheme();            }
+                //tm.applyTheme(this);
+            }
         });
         palletsRecycler.setAdapter(palletsAdapter);
 

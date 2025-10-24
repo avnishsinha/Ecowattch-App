@@ -68,7 +68,7 @@ public class DashboardActivity extends AppCompatActivity {
         setupFragment(savedInstanceState);
         startLiveDataUpdates();
 
-        tm.applyTheme();
+        tm.applyTheme(this);
     }
     
     private void initializeComponents() {

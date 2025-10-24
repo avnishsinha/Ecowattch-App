@@ -22,17 +22,7 @@ public class ThemeManager {
 
     public ThemeManager(Context context) {
         this.context = context;
-        prefs = context.getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
-    }
-
-    /**
-     * applyTheme() - call in onCreate(), after setContentView().
-     * or just anytime the theme is changed.
-     */
-    public void applyTheme() {
-        Map<String, Integer> themeColors = loadThemeColorsFromPrefs(context);
-        View root = ((Activity) context).findViewById(android.R.id.content);
-        applyThemeRecursively(root, themeColors);
+        this.prefs = context.getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
     }
 
     private Map<String, Integer> loadThemeColorsFromPrefs(Context context) {
@@ -54,6 +44,17 @@ public class ThemeManager {
         themeColors.put("background_light", Color.parseColor(prefs.getString("background_light", "#262626")));
 
         return themeColors;
+    }
+
+    /**
+     * applyTheme() - call in onCreate(), after setContentView().
+     * or just anytime the theme is changed.
+     */
+    public void applyTheme(Context context) {
+        prefs = context.getSharedPreferences("ThemePrefs", Context.MODE_PRIVATE);
+        Map<String, Integer> themeColors = loadThemeColorsFromPrefs(context);
+        View root = ((Activity) context).findViewById(android.R.id.content);
+        applyThemeRecursively(root, themeColors);
     }
 
     private void applyThemeRecursively(View view, Map<String, Integer> colorMap) {
