@@ -526,7 +526,7 @@ public class DashboardActivity extends AppCompatActivity {
         
         return (int) (baseLoad * efficiencyFactor);
     }
-    
+    // demo thing
     @Override
     protected void onDestroy() {
         super.onDestroy();
