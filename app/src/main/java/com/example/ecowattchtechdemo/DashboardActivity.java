@@ -56,7 +56,7 @@ public class DashboardActivity extends AppCompatActivity {
     private int thresholdValue = 300; // Threshold at 300kw
 
     // theme manager
-    ThemeManager tm = new ThemeManager(this);
+    private ThemeManager tm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,12 @@ public class DashboardActivity extends AppCompatActivity {
         setupFragment(savedInstanceState);
         startLiveDataUpdates();
 
+        // initialize themeManager
+        tm = new ThemeManager(this);
+    }
+
+    protected void onStart() {
+        super.onStart();
         tm.applyTheme(this);
     }
     

@@ -27,7 +27,7 @@ public class ShopActivity extends AppCompatActivity {
     private List<ShopItem> ownedList;
 
     // theme manager
-    ThemeManager tm = new ThemeManager(this);
+    private ThemeManager tm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,12 @@ public class ShopActivity extends AppCompatActivity {
         // Setup tab click listeners
         setupTabs();
 
-        // apply theme if changed
+        // initialize ThemeManager
+        tm = new ThemeManager(this);
+    }
+
+    protected void onStart() {
+        super.onStart();
         tm.applyTheme(this);
     }
 
@@ -114,7 +119,7 @@ public class ShopActivity extends AppCompatActivity {
                 editor.apply();
 
                 // apply theme
-                //tm.applyTheme(this);
+                //tm.applyTheme();
             }
         });
         palletsRecycler.setAdapter(palletsAdapter);
