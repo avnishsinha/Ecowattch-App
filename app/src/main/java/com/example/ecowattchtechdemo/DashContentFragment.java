@@ -16,6 +16,8 @@ public class DashContentFragment extends Fragment {
     private TextView currentUsageText;
     private TextView yesterdaysTotalText;
     private TextView potentialEnergyText;
+    // theme manager
+    private ThemeManager tm;
     
     @Nullable
     @Override
@@ -30,6 +32,9 @@ public class DashContentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Initialize all TextViews after view is created
         initializeViews(view);
+
+        tm = new ThemeManager(requireContext());
+        tm.applyTheme();
     }
     
     private void initializeViews(View view) {

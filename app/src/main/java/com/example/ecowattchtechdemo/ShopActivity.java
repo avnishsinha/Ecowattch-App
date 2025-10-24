@@ -35,9 +35,9 @@ public class ShopActivity extends AppCompatActivity {
     // TEST PALETTE VALUES
     private final Map<String, String[]> paletteColors = new HashMap<String, String[]>() {{
         put("PEACH", new String[]{"#FFFFFF", "#AAAAAA", "#CD232E", "#1B1B1B", "#262626"});
-        put("BLUE", new String[]{"#060606", "#AAAAAA", "#1956DB", "#BCBCBC", "#262626"});
+        put("BLUE", new String[]{"#060606", "#1B1B1B", "#1956DB", "#BCBCBC", "#7D7D7D"});
         put("GREEN", new String[]{"#FFFFFF", "#AAAAAA", "#19BD53", "#38916A", "#262626"});
-        put("MAGENTA", new String[]{"#0F0F0F", "#AAAAAA", "#D719DB", "#EFEFEF", "#262626"});
+        put("MAGENTA", new String[]{"#0F0F0F", "#AAAAAA", "#D719DB", "#EFEFEF", "#707070"});
         put("CYAN", new String[]{"#FFFFFF", "#AAAAAA", "#19DBD1", "#313131", "#262626"});
     }};
 

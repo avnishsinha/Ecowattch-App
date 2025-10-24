@@ -78,7 +78,7 @@ public class ThemeManager {
 
         Object tag = view.getTag();
 
-        // Example: text color updates
+        // text color updates
         if (view instanceof TextView) {
             if ("primary_text".equals(tag)) {
                 ((TextView) view).setTextColor(colors.get("primary_text"));
@@ -96,7 +96,27 @@ public class ThemeManager {
             }
         }
 
-        // Backgrounds
+        // images
+        if (view instanceof ImageView) {
+            if ("primary_color".equals(tag)) {
+                ((ImageView) view).setColorFilter(colors.get("primary_color"));
+            } else if ("secondary_color".equals(tag)) {
+                ((ImageView) view).setColorFilter(colors.get("secondary_color"));
+            } else if ("accent_color".equals(tag)) {
+                ((ImageView) view).setColorFilter(colors.get("accent_color"));
+            }
+        }
+
+        // todo: buttons
+        // they have both xml backgrounds and text
+        // both need to be changed
+        if (view instanceof LinearLayout) {
+            if ("background_light".equals(tag)) {
+                ((LinearLayout) view).setBackgroundColor(colors.get("background_light"));
+            }
+        }
+
+        // gradient handler
         Drawable bg = view.getBackground();
         if (bg != null) {
             bg = bg.mutate();
