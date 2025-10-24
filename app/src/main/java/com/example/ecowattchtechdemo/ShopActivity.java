@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShopActivity extends AppCompatActivity {
     Button backButton;
@@ -25,6 +27,18 @@ public class ShopActivity extends AppCompatActivity {
 
     private List<ShopItem> palletsList;
     private List<ShopItem> ownedList;
+
+    // theme manager
+    private ThemeManager tm;
+
+    // TEST PALETTE VALUES
+    private final Map<String, String[]> paletteColors = new HashMap<String, String[]>() {{
+        put("PEACH", new String[]{"#FFFFFF", "#AAAAAA", "#CD232E", "#1B1B1B", "#262626"});
+        put("BLUE", new String[]{"#060606", "#AAAAAA", "#1956DB", "#BCBCBC", "#262626"});
+        put("GREEN", new String[]{"#FFFFFF", "#AAAAAA", "#19BD53", "#38916A", "#262626"});
+        put("MAGENTA", new String[]{"#0F0F0F", "#AAAAAA", "#D719DB", "#EFEFEF", "#262626"});
+        put("CYAN", new String[]{"#FFFFFF", "#AAAAAA", "#19DBD1", "#313131", "#262626"});
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +80,35 @@ public class ShopActivity extends AppCompatActivity {
 
         // Setup tab click listeners
         setupTabs();
+
+        // initialize ThemeManager
+        tm = new ThemeManager(this);
+    }
+
+    protected void onStart() {
+        super.onStart();
+        tm.applyTheme(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        tm.applyTheme(this);
     }
 
     private void initializeSampleData() {
         // Sample palette data - AND HERE
         palletsList = new ArrayList<>();
         palletsList.add(new ShopItem("PEACH", 400, R.drawable.gradient_circle_extended));
-        palletsList.add(new ShopItem("OCEAN", 500, R.drawable.gradient_circle_extended));
-        palletsList.add(new ShopItem("SUNSET", 600, R.drawable.gradient_circle_extended));
-        palletsList.add(new ShopItem("FOREST", 450, R.drawable.gradient_circle_extended));
-        palletsList.add(new ShopItem("LAVENDER", 550, R.drawable.gradient_circle_extended));
+        palletsList.add(new ShopItem("BLUE", 500, R.drawable.gradient_circle_extended));
+        palletsList.add(new ShopItem("GREEN", 600, R.drawable.gradient_circle_extended));
+        palletsList.add(new ShopItem("MAGENTA", 450, R.drawable.gradient_circle_extended));
+        palletsList.add(new ShopItem("CYAN", 550, R.drawable.gradient_circle_extended));
 
         // Sample owned items - backend will replace with user's owned items
         ownedList = new ArrayList<>();
         ownedList.add(new ShopItem("PEACH", 400, R.drawable.gradient_circle_extended));
+        ownedList.get(0).setOwned(true);
+        ownedList.add(new ShopItem("BLUE", 500, R.drawable.gradient_circle_extended));
         ownedList.get(0).setOwned(true);
     }
 
@@ -93,6 +122,26 @@ public class ShopActivity extends AppCompatActivity {
             @Override
             public void onItemClick(ShopItem item, int position) {
                 // Handle item click - backend can add purchase logic here - Risa you use palette handler here)
+
+                // get colors for clicked palette
+                String[] colors = paletteColors.get(item.getName());
+                if (colors == null || colors.length < 5) return;
+
+                // get color values from backend, store in SharedPreferences
+                SharedPreferences prefs = getSharedPreferences("ThemePrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+
+                // temp: (replace hardcoded hex codes with values pulled from db)
+                editor.putString("primary_color", colors[0]);
+                editor.putString("secondary_color", colors[1]);
+                editor.putString("accent_color", colors[2]);
+                editor.putString("background_main", colors[3]);
+                editor.putString("background_light", colors[4]);
+
+                editor.apply();
+
+                // apply theme
+                onResume();
             }
         });
         palletsRecycler.setAdapter(palletsAdapter);
