@@ -79,6 +79,11 @@ public class ShopActivity extends AppCompatActivity {
         tm.applyTheme(this);
     }
 
+    protected void onResume() {
+        super.onResume();
+        tm.applyTheme(this);
+    }
+
     private void initializeSampleData() {
         // Sample palette data - AND HERE
         palletsList = new ArrayList<>();
@@ -91,6 +96,8 @@ public class ShopActivity extends AppCompatActivity {
         // Sample owned items - backend will replace with user's owned items
         ownedList = new ArrayList<>();
         ownedList.add(new ShopItem("PEACH", 400, R.drawable.gradient_circle_extended));
+        ownedList.get(0).setOwned(true);
+        ownedList.add(new ShopItem("OCEAN", 500, R.drawable.gradient_circle_extended));
         ownedList.get(0).setOwned(true);
     }
 
@@ -119,7 +126,7 @@ public class ShopActivity extends AppCompatActivity {
                 editor.apply();
 
                 // apply theme
-                //tm.applyTheme();
+                onResume();
             }
         });
         palletsRecycler.setAdapter(palletsAdapter);

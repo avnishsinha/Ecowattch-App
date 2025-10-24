@@ -106,7 +106,7 @@ public class ThemeManager {
                         }
                     }
                 }
-            }
+            } // circle gradient handler
         }
 
         // Recurse into child views
