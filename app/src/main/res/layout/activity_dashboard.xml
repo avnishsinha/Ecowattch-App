@@ -22,7 +22,7 @@
     <!-- Logout Button (Top Right) -->
     <ImageView
         android:id="@+id/logout_button"
-        android:tag="primary_color"
+        android:tag="accent_color"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentTop="true"

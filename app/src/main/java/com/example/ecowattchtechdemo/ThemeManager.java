@@ -78,7 +78,7 @@ public class ThemeManager {
 
         Object tag = view.getTag();
 
-        // Example: text color updates
+        // text color updates
         if (view instanceof TextView) {
             if ("primary_text".equals(tag)) {
                 ((TextView) view).setTextColor(colors.get("primary_text"));
@@ -93,6 +93,17 @@ public class ThemeManager {
         if (view instanceof RelativeLayout) {
             if ("background_main".equals(tag)) {
                 ((RelativeLayout) view).setBackgroundColor(colors.get("background_main"));
+            }
+        }
+
+        // images
+        if (view instanceof ImageView) {
+            if ("primary_color".equals(tag)) {
+                ((ImageView) view).setColorFilter(colors.get("primary_color"));
+            } else if ("secondary_color".equals(tag)) {
+                ((ImageView) view).setColorFilter(colors.get("secondary_color"));
+            } else if ("accent_color".equals(tag)) {
+                ((ImageView) view).setColorFilter(colors.get("accent_color"));
             }
         }
 
