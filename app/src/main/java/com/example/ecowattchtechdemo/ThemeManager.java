@@ -43,7 +43,7 @@ public class ThemeManager {
         themeColors.put("secondary_text", getColorFromPrefs("secondary_color", "#AAAAAA"));
         themeColors.put("accent_text", getColorFromPrefs("accent_color", "#CD232E"));
 
-        themeColors.put("background_dark", getColorFromPrefs("background_dark", "#1B1B1B"));
+        themeColors.put("background_main", getColorFromPrefs("background_main", "#1B1B1B"));
         themeColors.put("background_light", getColorFromPrefs("background_light", "#262626"));
 
         return themeColors;
