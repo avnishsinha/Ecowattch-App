@@ -107,7 +107,16 @@ public class ThemeManager {
             }
         }
 
-        // Backgrounds
+        // todo: buttons
+        // they have both xml backgrounds and text
+        // both need to be changed
+        if (view instanceof LinearLayout) {
+            if ("background_light".equals(tag)) {
+                ((LinearLayout) view).setBackgroundColor(colors.get("background_light"));
+            }
+        }
+
+        // gradient handler
         Drawable bg = view.getBackground();
         if (bg != null) {
             bg = bg.mutate();
