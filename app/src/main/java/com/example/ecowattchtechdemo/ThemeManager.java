@@ -83,6 +83,13 @@ public class ThemeManager {
             }
         }
 
+        // change background
+        if (view instanceof RelativeLayout) {
+            if ("background_main".equals(tag)) {
+                ((RelativeLayout) view).setBackgroundColor(colors.get("background_main"));
+            }
+        }
+
         // Backgrounds
         Drawable bg = view.getBackground();
         if (bg != null) {
