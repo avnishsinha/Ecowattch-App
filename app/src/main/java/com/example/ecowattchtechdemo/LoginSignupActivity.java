@@ -5,9 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginSignupActivity extends AppCompatActivity {
-    // theme manager
-    private ThemeManager tm;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +17,5 @@ public class LoginSignupActivity extends AppCompatActivity {
                     .replace(R.id.login_signup_fragment_container, new LoginFragment())
                     .commit();
         }
-
-        // initialize ThemeManager
-        tm = new ThemeManager(this);
-    }
-
-    protected void onStart() {
-        super.onStart();
-        tm.applyTheme();
     }
 }

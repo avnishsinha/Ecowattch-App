@@ -30,8 +30,6 @@ public class SignupFragment extends Fragment {
     TextView loginLink;
     TextInputEditText signupUser, signupPass, confirmPass;
     AutoCompleteTextView dormDropdown;
-    // theme manager
-    ThemeManager tm;
 
     @Nullable
     @Override
@@ -117,13 +115,5 @@ public class SignupFragment extends Fragment {
         });
 
         return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        tm = new ThemeManager(requireContext());
-        tm.applyTheme();
     }
 }
