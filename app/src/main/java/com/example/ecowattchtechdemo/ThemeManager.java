@@ -61,11 +61,17 @@ public class ThemeManager {
      * applyTheme() - call in onCreate(), after setContentView().
      * or just anytime the theme is changed.
      */
-    public void applyTheme(Context context) {
+    public void applyTheme() {
         View root = ((Activity) context).findViewById(android.R.id.content);
         Map<String, Integer> themeColors = loadThemeColorsFromPrefs();
         applyThemeRecursively(root, themeColors);
     }
+
+    public void applyTheme(Map<String, Integer> themeColors) {
+        View root = ((Activity) context).findViewById(android.R.id.content);
+        applyThemeRecursively(root, themeColors);
+    }
+
 
     private void applyThemeRecursively(View view, Map<String, Integer> colors) {
         if (view == null) return;

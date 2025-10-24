@@ -74,7 +74,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
-        tm.applyTheme(this);
+        tm.applyTheme();
     }
     
     private void initializeComponents() {
